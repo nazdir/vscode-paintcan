@@ -12,9 +12,9 @@ const App: React.FC = () => {
   const [secondary, setSecondary] = useState<ColorResult>()
   const [tertiary, setTertiary] = useState<ColorResult>()
 
-  const c1 = primary ? primary.hex : '#4E0001'
+  const c1 = primary ? primary.hex : '#4e0001'
   const c2 = secondary ? secondary.hex : '#eeeeee'
-  const c3 = tertiary ? tertiary.hex : '#DAA520'
+  const c3 = tertiary ? tertiary.hex : '#daa520'
   const white = '#eeeeee'
   const black = '#111111'
 
