@@ -89,7 +89,7 @@ const App: React.FC = () => {
     <Container style={{ padding: '5rem' }}>
       {/* top half */}
       <Grid container style={{ marginBottom: '2rem' }}>
-        <Grid item xs={4}>
+        <Grid item xs={12} style={{ display: 'flex', justifyContent: 'space-around' }}>
           <ChromePicker
             disableAlpha
             color={c1}
@@ -97,8 +97,6 @@ const App: React.FC = () => {
               setPrimary(c)
             }}
           />
-        </Grid>
-        <Grid item xs={4}>
           <ChromePicker
             disableAlpha
             color={c2}
@@ -106,8 +104,6 @@ const App: React.FC = () => {
               setSecondary(c)
             }}
           />
-        </Grid>
-        <Grid item xs={4}>
           <ChromePicker
             disableAlpha
             color={c3}
