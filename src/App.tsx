@@ -18,7 +18,7 @@ const App: React.FC = () => {
   const white = '#eeeeee'
   const black = '#111111'
 
-  let c1dark = tinycolor(c1)
+  const c1dark = tinycolor(c1)
     .darken(10)
     .toHexString()
 
@@ -27,7 +27,7 @@ const App: React.FC = () => {
     .desaturate(50)
     .toHexString()
 
-  let c2dark = tinycolor(c2)
+  const c2dark = tinycolor(c2)
     .darken(10)
     .toHexString()
 
