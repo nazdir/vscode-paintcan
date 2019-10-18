@@ -36,15 +36,6 @@ const App: React.FC = () => {
     .desaturate(50)
     .toHexString()
 
-  let c3dark = tinycolor(c3)
-    .darken(10)
-    .toHexString()
-
-  let c3darkest = tinycolor(c3)
-    .darken(10)
-    .desaturate(50)
-    .toHexString()
-
   while (tinycolor(c1darkest).getBrightness() > 30) {
     c1darkest = tinycolor(c1darkest)
       .darken(1)
