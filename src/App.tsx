@@ -205,13 +205,13 @@ const App: React.FC = () => {
                   display: 'flex',
                   marginLeft: '13rem',
                   background: c1darkest,
-                  color: `${c2}66`,
+                  color: `${white}66`,
                   fontSize: '10px',
                 }}
               >
                 <div style={{ padding: '.25rem' }}>PROBLEMS</div>
                 <div style={{ padding: '.25rem' }}>DEBUG</div>
-                <div style={{ padding: '.25rem', color: c2, borderBottom: `1px solid ${c3}` }}>
+                <div style={{ padding: '.25rem', color: white, borderBottom: `1px solid ${c3}` }}>
                   TERMINAL
                 </div>
               </Box>
