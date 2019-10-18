@@ -96,6 +96,7 @@ const App: React.FC = () => {
 
   return (
     <Container style={{ padding: '5rem' }}>
+      {/* top half */}
       <Grid container style={{ marginBottom: '2rem' }}>
         <Grid item xs={4}>
           <ChromePicker
@@ -125,105 +126,130 @@ const App: React.FC = () => {
           />
         </Grid>
       </Grid>
-
+      {/* bottom half */}
       <Grid container>
-        <Grid item xs={6}>
-          <Grid item xs={12}>
-            <Box
-              style={{
-                backgroundColor: c1dark,
-                width: '12rem',
-                display: 'flex',
-                padding: '.5rem',
-                alignItems: 'center',
-                color: text,
-                justifyContent: 'space-around',
-              }}
-            >
-              <div>File</div>
-              <div>Edit</div>
-              <div>Selection</div>
-            </Box>
-          </Grid>
-          <Grid item xs={8} style={{ display: 'flex' }}>
-            <Box
-              style={{
-                backgroundColor: c1,
-                width: '1rem',
-                height: '15rem',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                padding: '1rem',
-                color: c2,
-                justifyContent: 'space-around',
-              }}
-            >
-              <Box style={{ position: 'relative' }}>
-                <FiAlertCircle size="2rem" />
-                <Avatar
-                  style={{
-                    width: '1rem',
-                    height: '1rem',
-                    fontSize: '12px',
-                    position: 'absolute',
-                    top: '20px',
-                    left: '20px',
-                    backgroundColor: c3,
-                    color: badgeText,
-                  }}
-                >
-                  4
-                </Avatar>
+        {/* preview side */}
+        <Grid item xs={6} style={{ pointerEvents: 'none', userSelect: 'none' }}>
+          <Grid container style={{ backgroundColor: '#1e1e1e' }}>
+            {/* title bar */}
+            <Grid item xs={12}>
+              <Box
+                style={{
+                  backgroundColor: c1dark,
+                  display: 'flex',
+                  padding: '.5rem',
+                  alignItems: 'center',
+                  color: c2,
+                  justifyContent: 'start',
+                }}
+              >
+                <div style={{ marginRight: '.5rem' }}>File</div>
+                <div style={{ marginRight: '.5rem' }}>Edit</div>
+                <div style={{ marginRight: '.5rem' }}>Selection</div>
               </Box>
-              <FiGrid size="2rem" style={{ opacity: 0.9 }} />
-              <FiSave size="2rem" style={{ opacity: 0.8 }} />
-              <FiFile size="2rem" style={{ opacity: 0.7 }} />
-            </Box>
-            <Box
-              style={{
-                width: '10rem',
-                height: '17rem',
-                backgroundColor: c1darkest,
-                color: white,
-                fontSize: 14,
-                lineHeight: '18px',
-              }}
-            >
-              <div style={{ backgroundColor: c1, fontWeight: 'bold', color: text }}>
-                OPEN EDITORS
-              </div>
-              <div>file</div>
-              <div>file</div>
-              <div style={{ backgroundColor: c1, color: text }}>WORKSPACE</div>
-              <div>file</div>
-              <div style={{ backgroundColor: `${c2darkest}66` }}>hover</div>
-              <div>file</div>
-              <div style={{ backgroundColor: `${c2darkest}66` }}>focus</div>
-              <div>file</div>
-              <div style={{ backgroundColor: `${c2dark}66` }}>active</div>
-              <div>file</div>
-              <div style={{ backgroundColor: `${c2dark}33` }}>inactive</div>
-              <div>file</div>
-            </Box>
-          </Grid>
-          <Grid item xs={12}>
-            <Box
-              style={{
-                backgroundColor: c1dark,
-                width: '12.5rem',
-                display: 'flex',
-                padding: '.25rem',
-                alignItems: 'center',
-                color: text,
-                justifyContent: 'space-around',
-              }}
-            >
-              <div>master</div>
-            </Box>
+            </Grid>
+            <Grid item xs={12} style={{ display: 'flex', position: 'relative' }}>
+              {/* side bar */}
+              <Box
+                style={{
+                  backgroundColor: c1,
+                  width: '1rem',
+                  height: '15rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  padding: '1rem',
+                  color: c2,
+                  justifyContent: 'space-around',
+                }}
+              >
+                <Box style={{ position: 'relative' }}>
+                  <FiAlertCircle size="2rem" />
+                  <Avatar
+                    style={{
+                      width: '1rem',
+                      height: '1rem',
+                      fontSize: '12px',
+                      position: 'absolute',
+                      top: '20px',
+                      left: '20px',
+                      backgroundColor: c3,
+                      color: badgeText,
+                    }}
+                  >
+                    4
+                  </Avatar>
+                </Box>
+                <FiGrid size="2rem" style={{ opacity: 0.9 }} />
+                <FiSave size="2rem" style={{ opacity: 0.8 }} />
+                <FiFile size="2rem" style={{ opacity: 0.7 }} />
+              </Box>
+              {/* file menu */}
+              <Box
+                style={{
+                  width: '10rem',
+                  backgroundColor: c1darkest,
+                  color: white,
+                  fontSize: 14,
+                  lineHeight: '18px',
+                }}
+              >
+                <div style={{ backgroundColor: c1, fontWeight: 'bold', color: text }}>
+                  OPEN EDITORS
+                </div>
+                <div>file</div>
+                <div>file</div>
+                <div style={{ backgroundColor: c1, color: text }}>WORKSPACE</div>
+                <div>file</div>
+                <div style={{ backgroundColor: `${c2darkest}66` }}>hover</div>
+                <div>file</div>
+                <div style={{ backgroundColor: `${c2darkest}66` }}>focus</div>
+                <div>file</div>
+                <div style={{ backgroundColor: `${c2dark}66` }}>active</div>
+                <div>file</div>
+                <div style={{ backgroundColor: `${c2dark}33` }}>inactive</div>
+                <div>file</div>
+              </Box>
+              <Box
+                style={{
+                  position: 'absolute',
+                  padding: '1rem',
+                  bottom: 0,
+                  display: 'flex',
+                  marginLeft: '13rem',
+                  background: c1darkest,
+                  color: `${c2}66`,
+                  fontSize: '10px',
+                }}
+              >
+                <div style={{ padding: '.25rem' }}>PROBLEMS</div>
+                <div style={{ padding: '.25rem' }}>DEBUG</div>
+                <div style={{ padding: '.25rem', color: c2, borderBottom: `1px solid ${c3}` }}>
+                  TERMINAL
+                </div>
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              {/* status bar */}
+              <Box
+                style={{
+                  backgroundColor: c1dark,
+                  display: 'flex',
+                  padding: '.25rem',
+                  alignItems: 'center',
+                  color: c2,
+                  justifyContent: 'start',
+                }}
+              >
+                <div>master</div>
+              </Box>
+            </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={6}>
+        {/* middle */}
+        <Grid item xs={1} />
+        {/* code side */}
+        <Grid item xs={5}>
           <JSONPretty data={code} theme={JSONPrettyMon}></JSONPretty>
         </Grid>
       </Grid>
