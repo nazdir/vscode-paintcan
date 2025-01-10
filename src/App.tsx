@@ -1,13 +1,13 @@
+import { Avatar, Box, Container, Grid } from '@mui/material'
 import React, { useState } from 'react'
-import './App.css'
 import { ChromePicker, ColorResult } from 'react-color'
-import { Container, Grid, Box, Avatar } from '@material-ui/core'
-import { FiAlertCircle, FiGrid, FiSave, FiFile } from 'react-icons/fi'
-import tinycolor from 'tinycolor2'
+import { FiAlertCircle, FiFile, FiGrid, FiSave } from 'react-icons/fi'
 import JSONPretty from 'react-json-pretty'
+import tinycolor from 'tinycolor2'
+import './App.css'
+import 'react-json-pretty/themes/monikai.css'
 
 const App: React.FC = () => {
-  const JSONPrettyMon = require('react-json-pretty/dist/monikai')
   const [primary, setPrimary] = useState<ColorResult>()
   const [secondary, setSecondary] = useState<ColorResult>()
   const [tertiary, setTertiary] = useState<ColorResult>()
@@ -18,34 +18,20 @@ const App: React.FC = () => {
   const white = '#eeeeee'
   const black = '#111111'
 
-  const c1dark = tinycolor(c1)
-    .darken(10)
-    .toHexString()
+  const c1dark = tinycolor(c1).darken(10).toHexString()
 
-  let c1darkest = tinycolor(c1)
-    .darken(10)
-    .desaturate(50)
-    .toHexString()
+  let c1darkest = tinycolor(c1).darken(10).desaturate(50).toHexString()
 
-  const c2dark = tinycolor(c2)
-    .darken(10)
-    .toHexString()
+  const c2dark = tinycolor(c2).darken(10).toHexString()
 
-  let c2darkest = tinycolor(c2)
-    .darken(10)
-    .desaturate(50)
-    .toHexString()
+  let c2darkest = tinycolor(c2).darken(10).desaturate(50).toHexString()
 
   while (tinycolor(c1darkest).getBrightness() > 30) {
-    c1darkest = tinycolor(c1darkest)
-      .darken(1)
-      .toHexString()
+    c1darkest = tinycolor(c1darkest).darken(1).toHexString()
   }
 
   while (tinycolor(c2darkest).getBrightness() > 50) {
-    c2darkest = tinycolor(c2darkest)
-      .darken(1)
-      .toHexString()
+    c2darkest = tinycolor(c2darkest).darken(1).toHexString()
   }
 
   const text = tinycolor(c1).isLight() ? black : white
@@ -84,7 +70,6 @@ const App: React.FC = () => {
       },
     },
   }
-
   return (
     <Container style={{ padding: '5rem' }}>
       {/* top half */}
@@ -93,21 +78,21 @@ const App: React.FC = () => {
           <ChromePicker
             disableAlpha
             color={c1}
-            onChange={c => {
+            onChange={(c) => {
               setPrimary(c)
             }}
           />
           <ChromePicker
             disableAlpha
             color={c2}
-            onChange={c => {
+            onChange={(c) => {
               setSecondary(c)
             }}
           />
           <ChromePicker
             disableAlpha
             color={c3}
-            onChange={c => {
+            onChange={(c) => {
               setTertiary(c)
             }}
           />
@@ -237,7 +222,8 @@ const App: React.FC = () => {
         <Grid item xs={1} />
         {/* code side */}
         <Grid item xs={5}>
-          <JSONPretty data={code} theme={JSONPrettyMon}></JSONPretty>
+          {/* <JSONPretty data={code} theme={JSONPrettyMon}></JSONPretty> */}
+          <JSONPretty data={code}></JSONPretty>
         </Grid>
       </Grid>
     </Container>
