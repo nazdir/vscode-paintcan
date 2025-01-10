@@ -7,69 +7,77 @@ import tinycolor from 'tinycolor2'
 import './App.css'
 import 'react-json-pretty/themes/monikai.css'
 
-const App: React.FC = () => {
-  const [primary, setPrimary] = useState<ColorResult>()
-  const [secondary, setSecondary] = useState<ColorResult>()
-  const [tertiary, setTertiary] = useState<ColorResult>()
+const p = '#4e0001'
+const s = '#eeeeee'
+const t = '#daa520'
 
-  const c1 = primary ? primary.hex : '#4e0001'
-  const c2 = secondary ? secondary.hex : '#eeeeee'
-  const c3 = tertiary ? tertiary.hex : '#daa520'
+const createColorObj = (hex: string) => {
+  let darkest = new tinycolor(hex).darken(10).desaturate(50)
+  while (darkest.getBrightness() > 30) {
+    darkest = darkest.darken(1)
+  }
+  return {
+    main: new tinycolor(hex),
+    hex: new tinycolor(hex).toHexString(),
+    darkHex: new tinycolor(hex).darken(10).toHexString(),
+    darkestHex: new tinycolor(hex).darken(10).desaturate(50).toHexString(),
+  }
+}
+
+const App: React.FC = () => {
+  const [_primary, setPrimary] = useState<ColorResult>()
+  const [_secondary, setSecondary] = useState<ColorResult>()
+  const [_tertiary, setTertiary] = useState<ColorResult>()
+
+  const primary = createColorObj(_primary?.hex ?? p)
+  const secondary = createColorObj(_secondary?.hex ?? s)
+  const tertiary = createColorObj(_tertiary?.hex ?? t)
+
   const white = '#eeeeee'
   const black = '#111111'
 
-  const c1dark = tinycolor(c1).darken(10).toHexString()
-
-  let c1darkest = tinycolor(c1).darken(10).desaturate(50).toHexString()
-
-  const c2dark = tinycolor(c2).darken(10).toHexString()
-
-  let c2darkest = tinycolor(c2).darken(10).desaturate(50).toHexString()
-
-  while (tinycolor(c1darkest).getBrightness() > 30) {
-    c1darkest = tinycolor(c1darkest).darken(1).toHexString()
-  }
-
-  while (tinycolor(c2darkest).getBrightness() > 50) {
-    c2darkest = tinycolor(c2darkest).darken(1).toHexString()
-  }
-
-  const text = tinycolor(c1).isLight() ? black : white
-  const badgeText = tinycolor(c3).isLight() ? black : white
+  const text = primary.main.isLight() ? black : white
+  const badgeText = tertiary.main.isLight() ? black : white
 
   const code = {
     settings: {
       'workbench.colorCustomizations': {
-        'activityBar.background': c1,
-        'activityBar.foreground': c2,
-        'activityBar.inactiveForeground': `${c2}99`,
-        'activityBarBadge.background': c3,
+        'activityBar.background': primary.hex,
+        'activityBar.foreground': secondary.hex,
+        'activityBar.inactiveForeground': `${secondary.hex}99`,
+        'activityBarBadge.background': tertiary.hex,
         'activityBarBadge.foreground': badgeText,
         // 'editorGroup.border': c1,
-        'list.activeSelectionBackground': `${c2dark}66`,
-        'list.focusBackground': `${c2darkest}66`,
-        'list.hoverBackground': `${c2darkest}66`,
-        'list.inactiveSelectionBackground': `${c2dark}33`,
-        'panel.background': c1darkest,
+        'list.activeSelectionBackground': `${secondary.darkHex}66`,
+        'list.focusBackground': `${secondary.darkestHex}66`,
+        'list.hoverBackground': `${secondary.darkestHex}66`,
+        'list.inactiveSelectionBackground': `${secondary.darkHex}33`,
+        'panel.background': primary.darkestHex,
         // 'panel.border': c1,
-        'panelTitle.activeBorder': c3,
-        'panelTitle.activeForeground': c2,
-        'sideBar.background': c1darkest,
+        'panelTitle.activeBorder': tertiary.hex,
+        'panelTitle.activeForeground': secondary.hex,
+        'sideBar.background': primary.darkestHex,
+        'sideBar.foreground': white,
         // 'sideBar.border': c1,
-        'sideBarSectionHeader.background': c1,
+        'sideBarSectionHeader.background': primary.hex,
         'sideBarSectionHeader.foreground': text,
-        'statusBar.background': c1dark,
-        'statusBar.foreground': c2,
-        'statusBarItem.hoverBackground': c1,
-        'tab.activeBorder': c1,
-        'terminal.background': c1darkest,
-        'titleBar.activeBackground': c1dark,
-        'titleBar.activeForeground': c2,
-        'titleBar.inactiveBackground': `${c1dark}99`,
-        'titleBar.inactiveForeground': `${c2}99`,
+        'statusBar.background': primary.darkHex,
+        'statusBar.foreground': secondary.hex,
+        'statusBarItem.hoverBackground': primary.hex,
+        'tab.activeBorder': primary.hex,
+        'terminal.background': primary.darkestHex,
+        'titleBar.activeBackground': primary.darkHex,
+        'titleBar.activeForeground': secondary.hex,
+        'titleBar.inactiveBackground': `${primary.darkHex}99`,
+        'titleBar.inactiveForeground': `${secondary.hex}99`,
       },
     },
   }
+
+  const theme = code.settings['workbench.colorCustomizations']
+
+  console.log(theme)
+
   return (
     <Container style={{ padding: '5rem' }}>
       {/* top half */}
@@ -77,21 +85,21 @@ const App: React.FC = () => {
         <Grid item xs={12} style={{ display: 'flex', justifyContent: 'space-around' }}>
           <ChromePicker
             disableAlpha
-            color={c1}
+            color={primary?.hex}
             onChange={(c) => {
               setPrimary(c)
             }}
           />
           <ChromePicker
             disableAlpha
-            color={c2}
+            color={secondary?.hex}
             onChange={(c) => {
               setSecondary(c)
             }}
           />
           <ChromePicker
             disableAlpha
-            color={c3}
+            color={tertiary?.hex}
             onChange={(c) => {
               setTertiary(c)
             }}
@@ -107,11 +115,11 @@ const App: React.FC = () => {
             <Grid item xs={12}>
               <Box
                 style={{
-                  backgroundColor: c1dark,
+                  backgroundColor: theme['titleBar.activeBackground'],
                   display: 'flex',
                   padding: '.5rem',
                   alignItems: 'center',
-                  color: c2,
+                  color: theme['titleBar.activeForeground'],
                   justifyContent: 'start',
                 }}
               >
@@ -124,14 +132,14 @@ const App: React.FC = () => {
               {/* side bar */}
               <Box
                 style={{
-                  backgroundColor: c1,
+                  backgroundColor: theme['activityBar.background'],
                   width: '1rem',
                   height: '15rem',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
                   padding: '1rem',
-                  color: c2,
+                  color: theme['activityBar.foreground'],
                   justifyContent: 'space-around',
                 }}
               >
@@ -145,8 +153,8 @@ const App: React.FC = () => {
                       position: 'absolute',
                       top: '20px',
                       left: '20px',
-                      backgroundColor: c3,
-                      color: badgeText,
+                      backgroundColor: theme['activityBarBadge.background'],
+                      color: theme['activityBarBadge.foreground'],
                     }}
                   >
                     4
@@ -160,26 +168,43 @@ const App: React.FC = () => {
               <Box
                 style={{
                   width: '10rem',
-                  backgroundColor: c1darkest,
-                  color: white,
+                  backgroundColor: theme['sideBar.background'],
+                  color: theme['sideBar.foreground'],
                   fontSize: 14,
                   lineHeight: '18px',
                 }}
               >
-                <div style={{ backgroundColor: c1, fontWeight: 'bold', color: text }}>
+                <div
+                  style={{
+                    fontWeight: 'bold',
+                    backgroundColor: theme['sideBarSectionHeader.background'],
+                    color: theme['sideBarSectionHeader.foreground'],
+                  }}
+                >
                   OPEN EDITORS
                 </div>
                 <div>file</div>
                 <div>file</div>
-                <div style={{ backgroundColor: c1, color: text }}>WORKSPACE</div>
+                <div
+                  style={{
+                    backgroundColor: theme['sideBarSectionHeader.background'],
+                    color: theme['sideBarSectionHeader.foreground'],
+                  }}
+                >
+                  WORKSPACE
+                </div>
                 <div>file</div>
-                <div style={{ backgroundColor: `${c2darkest}66` }}>hover</div>
+                <div style={{ backgroundColor: theme['list.hoverBackground'] }}>hover</div>
                 <div>file</div>
-                <div style={{ backgroundColor: `${c2darkest}66` }}>focus</div>
+                <div style={{ backgroundColor: theme['list.focusBackground'] }}>focus</div>
                 <div>file</div>
-                <div style={{ backgroundColor: `${c2dark}66` }}>active</div>
+                <div style={{ backgroundColor: theme['list.activeSelectionBackground'] }}>
+                  active
+                </div>
                 <div>file</div>
-                <div style={{ backgroundColor: `${c2dark}33` }}>inactive</div>
+                <div style={{ backgroundColor: theme['list.inactiveSelectionBackground'] }}>
+                  inactive
+                </div>
                 <div>file</div>
               </Box>
               <Box
@@ -189,14 +214,36 @@ const App: React.FC = () => {
                   bottom: 0,
                   display: 'flex',
                   marginLeft: '13rem',
-                  background: c1darkest,
-                  color: `${white}66`,
+                  background: theme['panel.background'],
+                  color: theme['panelTitle.activeForeground'],
                   fontSize: '10px',
                 }}
               >
-                <div style={{ padding: '.25rem' }}>PROBLEMS</div>
-                <div style={{ padding: '.25rem' }}>DEBUG</div>
-                <div style={{ padding: '.25rem', color: white, borderBottom: `1px solid ${c3}` }}>
+                <div
+                  style={{
+                    padding: '.25rem',
+                    color: theme['panelTitle.activeForeground'],
+                    opacity: 0.75,
+                  }}
+                >
+                  PROBLEMS
+                </div>
+                <div
+                  style={{
+                    padding: '.25rem',
+                    color: theme['panelTitle.activeForeground'],
+                    opacity: 0.75,
+                  }}
+                >
+                  DEBUG
+                </div>
+                <div
+                  style={{
+                    padding: '.25rem',
+                    color: theme['panelTitle.activeForeground'],
+                    borderBottom: `1px solid ${theme['panelTitle.activeBorder']}`,
+                  }}
+                >
                   TERMINAL
                 </div>
               </Box>
@@ -205,11 +252,11 @@ const App: React.FC = () => {
               {/* status bar */}
               <Box
                 style={{
-                  backgroundColor: c1dark,
+                  backgroundColor: theme['statusBar.background'],
                   display: 'flex',
                   padding: '.25rem',
                   alignItems: 'center',
-                  color: c2,
+                  color: theme['statusBar.foreground'],
                   justifyContent: 'start',
                 }}
               >
