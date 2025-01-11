@@ -180,6 +180,7 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({ theme }: CodeDisplayProps) =>
               background: theme['terminal.background'],
               paddingLeft: '8px',
               height: '60px',
+              color: 'white',
             }}
           >
             {`C:\\> `}
