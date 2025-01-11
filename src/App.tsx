@@ -1,278 +1,137 @@
-import { Avatar, Box, Container, Grid } from '@mui/material'
+import { Container, Stack } from '@mui/material'
 import React, { useState } from 'react'
 import { ChromePicker, ColorResult } from 'react-color'
-import { FiAlertCircle, FiFile, FiGrid, FiSave } from 'react-icons/fi'
 import JSONPretty from 'react-json-pretty'
+import 'react-json-pretty/themes/monikai.css'
 import tinycolor from 'tinycolor2'
 import './App.css'
-import 'react-json-pretty/themes/monikai.css'
-
-const p = '#4e0001'
-const s = '#eeeeee'
-const t = '#daa520'
+import CodeDisplay from './components/CodeDisplay'
 
 const createColorObj = (hex: string) => {
-  let darkest = new tinycolor(hex).darken(10).desaturate(50)
+  let darkest = new tinycolor(hex)
+  let lightest = new tinycolor(hex)
   while (darkest.getBrightness() > 30) {
-    darkest = darkest.darken(1)
+    darkest.darken(1)
   }
+
+  while (lightest.getBrightness() < 80) {
+    lightest.lighten(1)
+  }
+
+  const main = new tinycolor(hex)
+  const dark = new tinycolor(hex).darken(10)
+  const light = new tinycolor(hex).lighten(10)
+
   return {
-    main: new tinycolor(hex),
+    main,
+    dark,
+    darkest,
+    light,
+    lightest,
     hex: new tinycolor(hex).toHexString(),
     darkHex: new tinycolor(hex).darken(10).toHexString(),
-    darkestHex: new tinycolor(hex).darken(10).desaturate(50).toHexString(),
+    lightHex: new tinycolor(hex).darken(10).toHexString(),
+    darkestHex: darkest.desaturate(40).toHexString(),
+    lightestHex: lightest.desaturate(40).toHexString(),
   }
 }
+
+const convertToStrings = (theme: { [k: string]: tinycolor.Instance }) =>
+  Object.fromEntries(
+    Object.entries(theme).map(([k, v]) => {
+      return v.getAlpha() === 1 ? [k, v.toHexString()] : [k, v.toHex8String()]
+    }),
+  )
 
 const App: React.FC = () => {
   const [_primary, setPrimary] = useState<ColorResult>()
   const [_secondary, setSecondary] = useState<ColorResult>()
   const [_tertiary, setTertiary] = useState<ColorResult>()
 
-  const primary = createColorObj(_primary?.hex ?? p)
-  const secondary = createColorObj(_secondary?.hex ?? s)
-  const tertiary = createColorObj(_tertiary?.hex ?? t)
+  const primary = createColorObj(_primary?.hex ?? '#4e0001')
+  const secondary = createColorObj(_secondary?.hex ?? '#eeeeee')
+  const tertiary = createColorObj(_tertiary?.hex ?? '#daa520')
 
-  const white = '#eeeeee'
-  const black = '#111111'
+  const white = new tinycolor('#eeeeee')
+  const black = new tinycolor('#111111')
 
   const text = primary.main.isLight() ? black : white
   const badgeText = tertiary.main.isLight() ? black : white
 
-  const code = {
-    settings: {
-      'workbench.colorCustomizations': {
-        'activityBar.background': primary.hex,
-        'activityBar.foreground': secondary.hex,
-        'activityBar.inactiveForeground': `${secondary.hex}99`,
-        'activityBarBadge.background': tertiary.hex,
-        'activityBarBadge.foreground': badgeText,
-        // 'editorGroup.border': c1,
-        'list.activeSelectionBackground': `${secondary.darkHex}66`,
-        'list.focusBackground': `${secondary.darkestHex}66`,
-        'list.hoverBackground': `${secondary.darkestHex}66`,
-        'list.inactiveSelectionBackground': `${secondary.darkHex}33`,
-        'panel.background': primary.darkestHex,
-        // 'panel.border': c1,
-        'panelTitle.activeBorder': tertiary.hex,
-        'panelTitle.activeForeground': secondary.hex,
-        'sideBar.background': primary.darkestHex,
-        'sideBar.foreground': white,
-        // 'sideBar.border': c1,
-        'sideBarSectionHeader.background': primary.hex,
-        'sideBarSectionHeader.foreground': text,
-        'statusBar.background': primary.darkHex,
-        'statusBar.foreground': secondary.hex,
-        'statusBarItem.hoverBackground': primary.hex,
-        'tab.activeBorder': primary.hex,
-        'terminal.background': primary.darkestHex,
-        'titleBar.activeBackground': primary.darkHex,
-        'titleBar.activeForeground': secondary.hex,
-        'titleBar.inactiveBackground': `${primary.darkHex}99`,
-        'titleBar.inactiveForeground': `${secondary.hex}99`,
-      },
-    },
+  const theme = {
+    primary: primary.main,
+    secondary: secondary.main,
+    tertiary: tertiary.main,
+    'activityBar.background': primary.main,
+    'activityBar.foreground': secondary.main,
+    'activityBar.inactiveForeground': secondary.main.clone().setAlpha(0.6),
+    'activityBarBadge.background': tertiary.main,
+    'activityBarBadge.foreground': badgeText,
+    'badge.background': tertiary.lightest,
+    'badge.foreground': tertiary.darkest,
+    'list.activeSelectionBackground': secondary.dark.clone().setAlpha(0.4),
+    'list.focusBackground': secondary.darkest.clone().setAlpha(0.4),
+    'list.hoverBackground': secondary.darkest.clone().setAlpha(0.4),
+    'list.inactiveSelectionBackground': secondary.dark.clone().setAlpha(0.2),
+    'panel.background': primary.darkest,
+    'panelTitle.activeBorder': tertiary.main,
+    'panelTitle.activeForeground': secondary.main,
+    'sideBar.background': primary.darkest,
+    'sideBar.foreground': white,
+    'sideBarSectionHeader.background': primary.main,
+    'sideBarSectionHeader.foreground': text,
+    'statusBar.background': primary.dark,
+    'statusBar.foreground': secondary.main,
+    'statusBarItem.hoverBackground': primary.main,
+    'tab.activeBorder': primary.main,
+    'terminal.background': primary.darkest.clone().darken(5),
+    'titleBar.activeBackground': primary.dark,
+    'titleBar.activeForeground': secondary.main,
+    'titleBar.inactiveBackground': primary.dark.clone().setAlpha(0.6),
+    'titleBar.inactiveForeground': secondary.main.clone().setAlpha(0.6),
   }
 
-  const theme = code.settings['workbench.colorCustomizations']
-
-  console.log(theme)
+  const code = {
+    settings: {
+      'workbench.colorCustomizations': convertToStrings(theme),
+    },
+  }
 
   return (
     <Container style={{ padding: '5rem' }}>
       {/* top half */}
-      <Grid container style={{ marginBottom: '2rem' }}>
-        <Grid item xs={12} style={{ display: 'flex', justifyContent: 'space-around' }}>
-          <ChromePicker
-            disableAlpha
-            color={primary?.hex}
-            onChange={(c) => {
-              setPrimary(c)
-            }}
-          />
-          <ChromePicker
-            disableAlpha
-            color={secondary?.hex}
-            onChange={(c) => {
-              setSecondary(c)
-            }}
-          />
-          <ChromePicker
-            disableAlpha
-            color={tertiary?.hex}
-            onChange={(c) => {
-              setTertiary(c)
-            }}
-          />
-        </Grid>
-      </Grid>
-      {/* bottom half */}
-      <Grid container>
-        {/* preview side */}
-        <Grid item xs={6} style={{ pointerEvents: 'none', userSelect: 'none' }}>
-          <Grid container style={{ backgroundColor: '#1e1e1e' }}>
-            {/* title bar */}
-            <Grid item xs={12}>
-              <Box
-                style={{
-                  backgroundColor: theme['titleBar.activeBackground'],
-                  display: 'flex',
-                  padding: '.5rem',
-                  alignItems: 'center',
-                  color: theme['titleBar.activeForeground'],
-                  justifyContent: 'start',
-                }}
-              >
-                <div style={{ marginRight: '.5rem' }}>File</div>
-                <div style={{ marginRight: '.5rem' }}>Edit</div>
-                <div style={{ marginRight: '.5rem' }}>Selection</div>
-              </Box>
-            </Grid>
-            <Grid item xs={12} style={{ display: 'flex', position: 'relative' }}>
-              {/* side bar */}
-              <Box
-                style={{
-                  backgroundColor: theme['activityBar.background'],
-                  width: '1rem',
-                  height: '15rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  padding: '1rem',
-                  color: theme['activityBar.foreground'],
-                  justifyContent: 'space-around',
-                }}
-              >
-                <Box style={{ position: 'relative' }}>
-                  <FiAlertCircle size="2rem" />
-                  <Avatar
-                    style={{
-                      width: '1rem',
-                      height: '1rem',
-                      fontSize: '12px',
-                      position: 'absolute',
-                      top: '20px',
-                      left: '20px',
-                      backgroundColor: theme['activityBarBadge.background'],
-                      color: theme['activityBarBadge.foreground'],
-                    }}
-                  >
-                    4
-                  </Avatar>
-                </Box>
-                <FiGrid size="2rem" style={{ opacity: 0.9 }} />
-                <FiSave size="2rem" style={{ opacity: 0.8 }} />
-                <FiFile size="2rem" style={{ opacity: 0.7 }} />
-              </Box>
-              {/* file menu */}
-              <Box
-                style={{
-                  width: '10rem',
-                  backgroundColor: theme['sideBar.background'],
-                  color: theme['sideBar.foreground'],
-                  fontSize: 14,
-                  lineHeight: '18px',
-                }}
-              >
-                <div
-                  style={{
-                    fontWeight: 'bold',
-                    backgroundColor: theme['sideBarSectionHeader.background'],
-                    color: theme['sideBarSectionHeader.foreground'],
-                  }}
-                >
-                  OPEN EDITORS
-                </div>
-                <div>file</div>
-                <div>file</div>
-                <div
-                  style={{
-                    backgroundColor: theme['sideBarSectionHeader.background'],
-                    color: theme['sideBarSectionHeader.foreground'],
-                  }}
-                >
-                  WORKSPACE
-                </div>
-                <div>file</div>
-                <div style={{ backgroundColor: theme['list.hoverBackground'] }}>hover</div>
-                <div>file</div>
-                <div style={{ backgroundColor: theme['list.focusBackground'] }}>focus</div>
-                <div>file</div>
-                <div style={{ backgroundColor: theme['list.activeSelectionBackground'] }}>
-                  active
-                </div>
-                <div>file</div>
-                <div style={{ backgroundColor: theme['list.inactiveSelectionBackground'] }}>
-                  inactive
-                </div>
-                <div>file</div>
-              </Box>
-              <Box
-                style={{
-                  position: 'absolute',
-                  padding: '1rem',
-                  bottom: 0,
-                  display: 'flex',
-                  marginLeft: '13rem',
-                  background: theme['panel.background'],
-                  color: theme['panelTitle.activeForeground'],
-                  fontSize: '10px',
-                }}
-              >
-                <div
-                  style={{
-                    padding: '.25rem',
-                    color: theme['panelTitle.activeForeground'],
-                    opacity: 0.75,
-                  }}
-                >
-                  PROBLEMS
-                </div>
-                <div
-                  style={{
-                    padding: '.25rem',
-                    color: theme['panelTitle.activeForeground'],
-                    opacity: 0.75,
-                  }}
-                >
-                  DEBUG
-                </div>
-                <div
-                  style={{
-                    padding: '.25rem',
-                    color: theme['panelTitle.activeForeground'],
-                    borderBottom: `1px solid ${theme['panelTitle.activeBorder']}`,
-                  }}
-                >
-                  TERMINAL
-                </div>
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              {/* status bar */}
-              <Box
-                style={{
-                  backgroundColor: theme['statusBar.background'],
-                  display: 'flex',
-                  padding: '.25rem',
-                  alignItems: 'center',
-                  color: theme['statusBar.foreground'],
-                  justifyContent: 'start',
-                }}
-              >
-                <div>master</div>
-              </Box>
-            </Grid>
-          </Grid>
-        </Grid>
-        {/* middle */}
-        <Grid item xs={1} />
-        {/* code side */}
-        <Grid item xs={5}>
-          {/* <JSONPretty data={code} theme={JSONPrettyMon}></JSONPretty> */}
-          <JSONPretty data={code}></JSONPretty>
-        </Grid>
-      </Grid>
+      <Stack direction={'row'} justifyContent={'space-around'} style={{ marginBottom: '2rem' }}>
+        <ChromePicker
+          disableAlpha
+          color={primary?.hex}
+          onChange={(c) => {
+            setPrimary(c)
+          }}
+        />
+        <ChromePicker
+          disableAlpha
+          color={secondary?.hex}
+          onChange={(c) => {
+            setSecondary(c)
+          }}
+        />
+        <ChromePicker
+          disableAlpha
+          color={tertiary?.hex}
+          onChange={(c) => {
+            setTertiary(c)
+          }}
+        />
+      </Stack>
+      <Stack direction={'row'} spacing={5}>
+        <CodeDisplay theme={convertToStrings(theme)} />
+        <div style={{ backgroundColor: '#272822' }}>
+          <JSONPretty
+            data={code}
+            style={{ paddingLeft: '1rem', paddingRight: '3rem', margin: 0 }}
+          ></JSONPretty>
+        </div>
+      </Stack>
     </Container>
   )
 }
