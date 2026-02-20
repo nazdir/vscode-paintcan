@@ -1,0 +1,42 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+
+  "settings": {
+    "workbench.colorCustomizations": {
+      "primary": "#19677d",
+      "secondary": "#dab020",
+      "tertiary": "#ffffff",
+      "activityBar.background": "#19677d",
+      "activityBar.foreground": "#dab020",
+      "activityBar.inactiveForeground": "#dab02099",
+      "activityBarBadge.background": "#ffffff",
+      "activityBarBadge.foreground": "#111111",
+      "badge.background": "#ffffff",
+      "badge.foreground": "#1e1e1e",
+      "list.activeSelectionBackground": "#ad8c1966",
+      "list.focusBackground": "#1b180d66",
+      "list.hoverBackground": "#1b180d66",
+      "list.inactiveSelectionBackground": "#ad8c1933",
+      "panel.background": "#131e22",
+      "panelTitle.activeBorder": "#ffffff",
+      "panelTitle.activeForeground": "#dab020",
+      "sideBar.background": "#131e22",
+      "sideBar.foreground": "#eeeeee",
+      "sideBarSectionHeader.background": "#19677d",
+      "sideBarSectionHeader.foreground": "#eeeeee",
+      "statusBar.background": "#114452",
+      "statusBar.foreground": "#dab020",
+      "statusBarItem.hoverBackground": "#19677d",
+      "tab.activeBorder": "#19677d",
+      "terminal.background": "#0a1012",
+      "titleBar.activeBackground": "#114452",
+      "titleBar.activeForeground": "#dab020",
+      "titleBar.inactiveBackground": "#11445299",
+      "titleBar.inactiveForeground": "#dab02099"
+    }
+  }
+}
