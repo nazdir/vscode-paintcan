@@ -30,14 +30,47 @@ const createColorObj = (hex: string) => {
   }
 }
 
-const convertToStrings = (theme: { [k: string]: tinycolor.Instance }) =>
+const convertToStrings = <T extends Record<string, tinycolor.Instance>>(theme: T): { [K in keyof T]: string } =>
   Object.fromEntries(
     Object.entries(theme).map(([k, v]) => {
       return v.getAlpha() === 1 ? [k, v.toHexString()] : [k, v.toHex8String()]
     }),
-  )
+  ) as { [K in keyof T]: string }
 
-export type Theme = Record<string, string>
+export interface Theme {
+  primary: string
+  secondary: string
+  tertiary: string
+  'activityBar.background': string
+  'activityBar.foreground': string
+  'activityBar.inactiveForeground': string
+  'activityBar.border': string
+  'activityBarBadge.background': string
+  'activityBarBadge.foreground': string
+  'badge.background': string
+  'badge.foreground': string
+  focusBorder: string
+  'list.activeSelectionBackground': string
+  'list.focusBackground': string
+  'list.hoverBackground': string
+  'list.inactiveSelectionBackground': string
+  'panel.background': string
+  'panelTitle.activeBorder': string
+  'panelTitle.activeForeground': string
+  'sideBar.background': string
+  'sideBar.foreground': string
+  'sideBarSectionHeader.background': string
+  'sideBarSectionHeader.foreground': string
+  'statusBar.background': string
+  'statusBar.foreground': string
+  'statusBarItem.hoverBackground': string
+  'tab.activeBorder': string
+  'terminal.background': string
+  'titleBar.activeBackground': string
+  'titleBar.activeForeground': string
+  'titleBar.inactiveBackground': string
+  'titleBar.inactiveForeground': string
+}
 
 const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: string): Theme => {
   const primary = createColorObj(primaryHex)
@@ -57,6 +90,7 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'activityBar.background': primary.main,
     'activityBar.foreground': secondary.main,
     'activityBar.inactiveForeground': secondary.main.clone().setAlpha(0.6),
+    'activityBar.border': primary.dark,
     'activityBarBadge.background': tertiary.main,
     'activityBarBadge.foreground': badgeText,
     'badge.background': tertiary.lightest,

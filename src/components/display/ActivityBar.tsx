@@ -38,7 +38,7 @@ const Badge = () => {
 
   return (
     <div
-      className="absolute -right-1 -bottom-1 flex h-3.5 w-3.5 justify-center rounded-full text-xs"
+      className="absolute -right-0.5 -bottom-1 flex h-3.5 w-3.5 justify-center rounded-full text-xs"
       style={{ backgroundColor: theme['activityBarBadge.background'], color: theme['activityBarBadge.foreground'] }}
     >
       4
