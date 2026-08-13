@@ -10,12 +10,12 @@ const Editor = () => {
 
   return (
     <div
-      className="overflow-hidden rounded"
+      className="flex h-full min-h-0 flex-col overflow-hidden rounded"
       style={{
         background: theme['editor.background'],
       }}
     >
-      <div className="flex w-full justify-between p-1">
+      <div className="flex w-full shrink-0 justify-between p-1">
         <div className="flex gap-2">
           <Tab>{openFiles[4]}</Tab>
           <Tab active>activeFile.ts</Tab>
@@ -60,7 +60,7 @@ const Tab = ({ active, selected, children }: TabProps) => {
 
 const TextBlock = () => {
   return (
-    <div className="flex h-full w-full min-w-0 overflow-hidden rounded p-4 font-mono text-xs text-white">
+    <div className="flex w-full min-w-0 flex-1 overflow-hidden rounded p-4 font-mono text-xs text-white">
       <pre className="min-w-0 overflow-hidden whitespace-pre">
         {`import React, { useMemo, useState } from 'react'
 

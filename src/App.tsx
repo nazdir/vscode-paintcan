@@ -28,8 +28,8 @@ const App = () => {
   }
 
   return (
-    <div className="grid h-screen w-full grid-cols-[auto_1fr_auto] gap-2">
-      <div className="flex w-60 flex-col items-center justify-around">
+    <div className="grid h-screen w-full grid-cols-[auto_1fr_auto] items-center gap-2 overflow-hidden bg-[#1e1e1e]">
+      <div className="flex h-99/100 min-h-0 w-60 flex-col items-center justify-center gap-10 overflow-y-auto text-white">
         <div className="text-center font-bold">
           <h1>Primary</h1>
           <ChromePicker disableAlpha color={primary} onChange={c => setPrimary(c.hex)} />
@@ -43,11 +43,11 @@ const App = () => {
           <ChromePicker disableAlpha color={tertiary} onChange={c => setTertiary(c.hex)} />
         </div>
       </div>
-      <div className="flex w-full items-center">
+      <div className="flex h-99/100 min-h-0 w-full items-center">
         <CodeDisplay />
       </div>
-      <div className="flex w-100 items-center">
-        <div className="h-11/12 w-full rounded bg-[#1e1e1e] p-2">
+      <div className="flex h-99/100 min-h-0 w-100 items-center">
+        <div className="h-full w-full rounded bg-[#1e1e1e] p-2">
           <button className="flex items-center gap-1 rounded border border-white px-2 text-white" type="button" onClick={copyTheme}>
             <VscCopy />
             Copy
