@@ -139,42 +139,6 @@ const App: React.FC = () => {
         </div>
       </div>
     </div>
-
-    // <Container style={{ padding: '5rem' }}>
-    //   {/* top half */}
-    //   <Stack direction={'row'} justifyContent={'space-around'} style={{ marginBottom: '2rem' }}>
-    //     <ChromePicker
-    //       disableAlpha
-    //       color={primary?.hex}
-    //       onChange={(c) => {
-    //         setPrimary(c)
-    //       }}
-    //     />
-    //     <ChromePicker
-    //       disableAlpha
-    //       color={secondary?.hex}
-    //       onChange={(c) => {
-    //         setSecondary(c)
-    //       }}
-    //     />
-    //     <ChromePicker
-    //       disableAlpha
-    //       color={tertiary?.hex}
-    //       onChange={(c) => {
-    //         setTertiary(c)
-    //       }}
-    //     />
-    //   </Stack>
-    //   <Stack direction={'row'} spacing={5}>
-    //     <CodeDisplay theme={convertToStrings(theme)} />
-    //     <div style={{ backgroundColor: '#272822' }}>
-    //       <JSONPretty
-    //         data={code}
-    //         style={{ paddingLeft: '1rem', paddingRight: '3rem', margin: 0 }}
-    //       ></JSONPretty>
-    //     </div>
-    //   </Stack>
-    // </Container>
   )
 }
 
