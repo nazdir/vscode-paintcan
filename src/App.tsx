@@ -134,7 +134,7 @@ const App: React.FC = () => {
         <CodeDisplay theme={convertToStrings(theme)} />
       </div>
       <div className="flex w-100 items-center">
-        <div className="w-full rounded bg-[#1e1e1e] p-2">
+        <div className="h-11/12 w-full rounded bg-[#1e1e1e] p-2">
           <JSONPretty data={code} className="w-full text-xs"></JSONPretty>
         </div>
       </div>

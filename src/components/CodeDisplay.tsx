@@ -202,13 +202,13 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({ theme }: CodeDisplayProps) =>
   )
 
   return (
-    <div className="size-full p-1" style={{ backgroundColor: '#1e1e1e', width: '100%', height: 'fit-content', fontSize: 14 }}>
+    <div className="h-11/12 w-full overflow-hidden rounded" style={{ backgroundColor: '#1e1e1e' }}>
       <TitleBar />
-      <Stack direction="row">
+      <div className="flex gap-2 p-2">
         <ActivityBar />
         <SideBar />
         <CodingArea />
-      </Stack>
+      </div>
       <StatusBar />
     </div>
   )
