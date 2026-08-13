@@ -6,7 +6,7 @@ import './App.css'
 import CodeDisplay from './components/CodeDisplay'
 import { useThemeStore } from './lib/themeStore'
 
-const App: React.FC = () => {
+const App = () => {
   const primary = useThemeStore(state => state.primary)
   const secondary = useThemeStore(state => state.secondary)
   const tertiary = useThemeStore(state => state.tertiary)

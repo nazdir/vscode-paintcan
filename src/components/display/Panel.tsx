@@ -2,7 +2,7 @@ import { Avatar } from '@mui/material'
 import React from 'react'
 import { useTheme } from '../../lib/themeStore'
 
-const Panel: React.FC = () => {
+const Panel = () => {
   const theme = useTheme()
 
   return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTheme } from '../../lib/themeStore'
 
-const SecondarySideBar: React.FC = () => {
+const SecondarySideBar = () => {
   const theme = useTheme()
 
   return (

@@ -8,7 +8,7 @@ import SecondarySideBar from './display/SecondarySideBar'
 import StatusBar from './display/StatusBar'
 import TitleBar from './display/TitleBar'
 
-const CodeDisplay: React.FC = () => {
+const CodeDisplay = () => {
   const theme = useTheme()
 
   return (

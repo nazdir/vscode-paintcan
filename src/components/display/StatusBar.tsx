@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTheme } from '../../lib/themeStore'
 
-const StatusBar: React.FC = () => {
+const StatusBar = () => {
   const theme = useTheme()
 
   return (

@@ -3,7 +3,7 @@ import { VscChevronDownCompact, VscKebabVertical } from 'react-icons/vsc'
 import { twMerge } from 'tailwind-merge'
 import { useTheme } from '../../lib/themeStore'
 
-const PrimarySideBar: React.FC = () => {
+const PrimarySideBar = () => {
   const theme = useTheme()
 
   return (

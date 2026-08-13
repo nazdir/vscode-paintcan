@@ -2,7 +2,7 @@ import React from 'react'
 import { VscVscode } from 'react-icons/vsc'
 import { useTheme } from '../../lib/themeStore'
 
-const TitleBar: React.FC = () => {
+const TitleBar = () => {
   const theme = useTheme()
 
   return (

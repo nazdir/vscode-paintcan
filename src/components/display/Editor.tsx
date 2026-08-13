@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTheme } from '../../lib/themeStore'
 
-const Editor: React.FC = () => {
+const Editor = () => {
   const theme = useTheme()
 
   return (

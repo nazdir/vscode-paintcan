@@ -3,7 +3,7 @@ import { VscAccount, VscExtensions, VscFiles, VscGithub, VscSearch, VscSettingsG
 
 import { useTheme } from '../../lib/themeStore'
 
-const ActivityBar: React.FC = () => {
+const ActivityBar = () => {
   const theme = useTheme()
 
   return (
@@ -33,7 +33,7 @@ const ActivityBar: React.FC = () => {
   )
 }
 
-const Badge: React.FC = () => {
+const Badge = () => {
   const theme = useTheme()
 
   return (
