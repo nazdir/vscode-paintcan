@@ -1,8 +1,8 @@
 {
   "folders": [
     {
-      "path": "."
-    }
+      "path": ".",
+    },
   ],
 
   "settings": {
@@ -36,7 +36,7 @@
       "titleBar.activeBackground": "#114452",
       "titleBar.activeForeground": "#dab020",
       "titleBar.inactiveBackground": "#11445299",
-      "titleBar.inactiveForeground": "#dab02099"
-    }
-  }
+      "titleBar.inactiveForeground": "#dab02099",
+    },
+  },
 }

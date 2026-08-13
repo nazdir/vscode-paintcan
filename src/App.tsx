@@ -1,8 +1,7 @@
-import { Container, Stack } from '@mui/material'
 import React, { useState } from 'react'
 import { ChromePicker, ColorResult } from 'react-color'
 import JSONPretty from 'react-json-pretty'
-import 'react-json-pretty/themes/monikai.css'
+import 'react-json-pretty/themes/acai.css'
 import tinycolor from 'tinycolor2'
 import './App.css'
 import CodeDisplay from './components/CodeDisplay'
@@ -98,41 +97,84 @@ const App: React.FC = () => {
   }
 
   return (
-    <Container style={{ padding: '5rem' }}>
-      {/* top half */}
-      <Stack direction={'row'} justifyContent={'space-around'} style={{ marginBottom: '2rem' }}>
-        <ChromePicker
-          disableAlpha
-          color={primary?.hex}
-          onChange={(c) => {
-            setPrimary(c)
-          }}
-        />
-        <ChromePicker
-          disableAlpha
-          color={secondary?.hex}
-          onChange={(c) => {
-            setSecondary(c)
-          }}
-        />
-        <ChromePicker
-          disableAlpha
-          color={tertiary?.hex}
-          onChange={(c) => {
-            setTertiary(c)
-          }}
-        />
-      </Stack>
-      <Stack direction={'row'} spacing={5}>
-        <CodeDisplay theme={convertToStrings(theme)} />
-        <div style={{ backgroundColor: '#272822' }}>
-          <JSONPretty
-            data={code}
-            style={{ paddingLeft: '1rem', paddingRight: '3rem', margin: 0 }}
-          ></JSONPretty>
+    <div className="grid h-screen w-full grid-cols-[auto_1fr_auto] gap-2">
+      <div className="flex w-60 flex-col items-center justify-around">
+        <div className="text-center font-bold">
+          <h1>Primary</h1>
+          <ChromePicker
+            disableAlpha
+            color={primary?.hex}
+            onChange={c => {
+              setPrimary(c)
+            }}
+          />
         </div>
-      </Stack>
-    </Container>
+        <div className="text-center font-bold">
+          <h1>Secondary</h1>
+          <ChromePicker
+            disableAlpha
+            color={secondary?.hex}
+            onChange={c => {
+              setSecondary(c)
+            }}
+          />
+        </div>
+        <div className="text-center font-bold">
+          <h1>Tertiary</h1>
+          <ChromePicker
+            disableAlpha
+            color={tertiary?.hex}
+            onChange={c => {
+              setTertiary(c)
+            }}
+          />
+        </div>
+      </div>
+      <div className="flex w-full items-center">
+        <CodeDisplay theme={convertToStrings(theme)} />
+      </div>
+      <div className="flex w-100 items-center">
+        <div className="w-full rounded bg-[#1e1e1e] p-2">
+          <JSONPretty data={code} className="w-full text-xs"></JSONPretty>
+        </div>
+      </div>
+    </div>
+
+    // <Container style={{ padding: '5rem' }}>
+    //   {/* top half */}
+    //   <Stack direction={'row'} justifyContent={'space-around'} style={{ marginBottom: '2rem' }}>
+    //     <ChromePicker
+    //       disableAlpha
+    //       color={primary?.hex}
+    //       onChange={(c) => {
+    //         setPrimary(c)
+    //       }}
+    //     />
+    //     <ChromePicker
+    //       disableAlpha
+    //       color={secondary?.hex}
+    //       onChange={(c) => {
+    //         setSecondary(c)
+    //       }}
+    //     />
+    //     <ChromePicker
+    //       disableAlpha
+    //       color={tertiary?.hex}
+    //       onChange={(c) => {
+    //         setTertiary(c)
+    //       }}
+    //     />
+    //   </Stack>
+    //   <Stack direction={'row'} spacing={5}>
+    //     <CodeDisplay theme={convertToStrings(theme)} />
+    //     <div style={{ backgroundColor: '#272822' }}>
+    //       <JSONPretty
+    //         data={code}
+    //         style={{ paddingLeft: '1rem', paddingRight: '3rem', margin: 0 }}
+    //       ></JSONPretty>
+    //     </div>
+    //   </Stack>
+    // </Container>
   )
 }
 

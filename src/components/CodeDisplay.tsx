@@ -1,6 +1,6 @@
-import { Grid, Avatar, Stack } from '@mui/material'
+import { Avatar, Grid, Stack } from '@mui/material'
 import React from 'react'
-import { FiAlertCircle, FiGrid, FiSave, FiFile } from 'react-icons/fi'
+import { FiAlertCircle, FiFile, FiGrid, FiSave } from 'react-icons/fi'
 
 interface CodeDisplayProps {
   theme: any
@@ -10,21 +10,15 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({ theme }: CodeDisplayProps) =>
   const TitleBar = () => (
     <div id="title-bar">
       <div
+        className="flex w-full items-center gap-2 p-1"
         style={{
           backgroundColor: theme['titleBar.activeBackground'],
-          display: 'flex',
-          paddingTop: '.5rem',
-          paddingBottom: '.5rem',
-          alignItems: 'center',
           color: theme['titleBar.activeForeground'],
-          justifyContent: 'start',
-          width: '100%',
-          height: '1rem',
         }}
       >
-        <div style={{ marginRight: '.5rem', marginLeft: '.5rem' }}>File</div>
-        <div style={{ marginRight: '.5rem' }}>Edit</div>
-        <div style={{ marginRight: '.5rem' }}>Selection</div>
+        <div>File</div>
+        <div>Edit</div>
+        <div>Selection</div>
       </div>
     </div>
   )
@@ -208,7 +202,7 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({ theme }: CodeDisplayProps) =>
   )
 
   return (
-    <div style={{ backgroundColor: '#1e1e1e', width: '100%', height: 'fit-content', fontSize: 14 }}>
+    <div className="size-full p-1" style={{ backgroundColor: '#1e1e1e', width: '100%', height: 'fit-content', fontSize: 14 }}>
       <TitleBar />
       <Stack direction="row">
         <ActivityBar />
