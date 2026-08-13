@@ -8,7 +8,7 @@ interface ActivityBarProps {
 const ActivityBar: React.FC<ActivityBarProps> = ({ theme }: ActivityBarProps) => (
   <div
     id="activity-bar"
-    className="flex h-full w-10 flex-col justify-between overflow-hidden rounded p-1 pb-2 text-2xl"
+    className="flex h-full w-10 flex-col items-center justify-between overflow-hidden rounded p-1 pb-2 text-xl"
     style={{
       backgroundColor: theme['activityBar.background'],
       color: theme['activityBar.foreground'],
@@ -33,7 +33,7 @@ const ActivityBar: React.FC<ActivityBarProps> = ({ theme }: ActivityBarProps) =>
 
 const Badge: React.FC<ActivityBarProps> = ({ theme }: ActivityBarProps) => (
   <div
-    className="absolute -right-1 -bottom-1 flex h-4 w-4 justify-center rounded-full text-xs"
+    className="absolute -right-1 -bottom-1 flex h-3.5 w-3.5 justify-center rounded-full text-xs"
     style={{ backgroundColor: theme['activityBarBadge.background'], color: theme['activityBarBadge.foreground'] }}
   >
     4
