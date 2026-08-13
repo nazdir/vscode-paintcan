@@ -1,5 +1,6 @@
 import React from 'react'
 import { ChromePicker } from 'react-color'
+import { VscCopy } from 'react-icons/vsc'
 import JSONPretty from 'react-json-pretty'
 import 'react-json-pretty/themes/acai.css'
 import './App.css'
@@ -19,6 +20,11 @@ const App = () => {
     settings: {
       'workbench.colorCustomizations': theme,
     },
+  }
+
+  const copyTheme = async () => {
+    const settings = JSON.stringify(code.settings, null, 2)
+    await navigator.clipboard.writeText(settings.slice(1, -1))
   }
 
   return (
@@ -42,6 +48,10 @@ const App = () => {
       </div>
       <div className="flex w-100 items-center">
         <div className="h-11/12 w-full rounded bg-[#1e1e1e] p-2">
+          <button className="flex items-center gap-1 rounded border border-white px-2 text-white" type="button" onClick={copyTheme}>
+            <VscCopy />
+            Copy
+          </button>
           <JSONPretty data={code} className="w-full text-xs"></JSONPretty>
         </div>
       </div>
