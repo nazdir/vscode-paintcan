@@ -1,10 +1,13 @@
 import React, { ComponentProps } from 'react'
 import { VscChevronDownCompact, VscKebabVertical } from 'react-icons/vsc'
 import { twMerge } from 'tailwind-merge'
+import fileNames from '../../lib/fileNames'
 import { useTheme } from '../../lib/themeStore'
 
 const PrimarySideBar = () => {
   const theme = useTheme()
+
+  const openFiles = fileNames.filter(fn => fn !== 'activeFile.ts' && fn !== 'selectedFile.tsx')
 
   return (
     <div
@@ -34,13 +37,13 @@ const PrimarySideBar = () => {
           borderColor: theme['activityBar.border'],
         }}
       >
-        <File>Inactive File 1</File>
-        <File active>Active File</File>
-        <File>Inactive File 2</File>
+        <File>{openFiles[4]}.ts</File>
+        <File active>activeFile.ts</File>
+        <File>{openFiles[1]}.ts</File>
         <File active selected>
-          Selected File
+          selectedFile.tsx
         </File>
-        <File>Inactive File 3</File>
+        <File>{openFiles[7]}</File>
       </div>
       <div
         className="flex items-center gap-1 font-bold"
@@ -51,13 +54,11 @@ const PrimarySideBar = () => {
         <VscChevronDownCompact />
         Workspace
       </div>
-      <File>Inactive File 1</File>
-      <File active>Active File</File>
-      <File>Inactive File 2</File>
-      <File active selected>
-        Selected File
-      </File>
-      <File>Inactive File 3</File>
+      {fileNames.map(name => (
+        <File active={name === 'selectedFile.tsx'} key={name}>
+          {name}
+        </File>
+      ))}
     </div>
   )
 }

@@ -6,7 +6,7 @@ const Panel = () => {
   const theme = useTheme()
 
   return (
-    <div id="coding-area" className="flex w-full overflow-hidden rounded border">
+    <div id="coding-area" className="flex h-full w-full overflow-hidden rounded border">
       <div
         style={{
           background: theme['panel.background'],

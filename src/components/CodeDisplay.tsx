@@ -12,17 +12,17 @@ const CodeDisplay = () => {
   const theme = useTheme()
 
   return (
-    <div className="h-11/12 w-full overflow-hidden rounded" style={{ backgroundColor: theme['titleBar.activeBackground'] }}>
+    <div className="h-11/12 w-full overflow-hidden rounded text-sm" style={{ backgroundColor: theme['titleBar.activeBackground'] }}>
       <div className="grid h-full grid-rows-[auto_1fr_auto]">
         <TitleBar />
         <div className="flex min-h-0 gap-2 p-2">
           <ActivityBar />
           <PrimarySideBar />
-          <div className="flex w-full flex-col gap-2">
-            <div className="h-full">
+          <div className="flex min-h-0 w-full min-w-0 flex-col gap-2">
+            <div className="min-h-0 min-w-0 flex-1">
               <Editor />
             </div>
-            <div className="h-fit">
+            <div className="h-40 shrink-0">
               <Panel />
             </div>
           </div>

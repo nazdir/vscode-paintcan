@@ -49,6 +49,7 @@ export interface Theme {
   'activityBarBadge.foreground': string
   'badge.background': string
   'badge.foreground': string
+  'editor.background': string
   focusBorder: string
   'list.activeSelectionBackground': string
   'list.focusBackground': string
@@ -57,6 +58,8 @@ export interface Theme {
   'panel.background': string
   'panelTitle.activeBorder': string
   'panelTitle.activeForeground': string
+  'panelTitle.inactiveForeground': string
+  'menu.foreground': string
   'sideBar.background': string
   'sideBar.foreground': string
   'sideBarSectionHeader.background': string
@@ -95,14 +98,18 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'activityBarBadge.foreground': badgeText,
     'badge.background': tertiary.lightest,
     'badge.foreground': tertiary.darkest,
+    'editor.background': primary.darkest,
     focusBorder: primary.main,
     'list.activeSelectionBackground': secondary.dark.clone().setAlpha(0.4),
     'list.focusBackground': secondary.darkest.clone().setAlpha(0.4),
     'list.hoverBackground': secondary.darkest.clone().setAlpha(0.4),
     'list.inactiveSelectionBackground': secondary.dark.clone().setAlpha(0.2),
     'panel.background': primary.darkest,
-    'panelTitle.activeBorder': tertiary.main,
-    'panelTitle.activeForeground': secondary.main,
+    'panelTitle.activeBorder': tertiary.main, //panel tabs
+    'panelTitle.activeForeground': secondary.main, //panel tabs
+    'panelTitle.inactiveForeground': secondary.main.clone().setAlpha(0.6), //panel tabs
+    'menu.foreground': white,
+    'menu.background': primary.darkest,
     'sideBar.background': primary.darkest,
     'sideBar.foreground': white,
     'sideBarSectionHeader.background': primary.main,
