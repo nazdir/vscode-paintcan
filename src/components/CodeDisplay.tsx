@@ -202,14 +202,16 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({ theme }: CodeDisplayProps) =>
   )
 
   return (
-    <div className="h-11/12 w-full overflow-hidden rounded" style={{ backgroundColor: '#1e1e1e' }}>
-      <TitleBar />
-      <div className="flex gap-2 p-2">
-        <ActivityBar />
-        <SideBar />
-        <CodingArea />
+    <div className="h-11/12 w-full overflow-hidden rounded" style={{ backgroundColor: theme['titleBar.activeBackground'] }}>
+      <div className="grid h-full grid-rows-[auto_1fr_auto]">
+        <TitleBar />
+        <div className="flex min-h-0 gap-2 p-2">
+          <ActivityBar />
+          <SideBar />
+          <CodingArea />
+        </div>
+        <StatusBar />
       </div>
-      <StatusBar />
     </div>
   )
 }
