@@ -72,6 +72,7 @@ const App: React.FC = () => {
     'activityBarBadge.foreground': badgeText,
     'badge.background': tertiary.lightest,
     'badge.foreground': tertiary.darkest,
+    focusBorder: primary.main,
     'list.activeSelectionBackground': secondary.dark.clone().setAlpha(0.4),
     'list.focusBackground': secondary.darkest.clone().setAlpha(0.4),
     'list.hoverBackground': secondary.darkest.clone().setAlpha(0.4),
