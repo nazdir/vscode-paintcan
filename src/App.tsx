@@ -47,9 +47,13 @@ const App: React.FC = () => {
   const [_secondary, setSecondary] = useState<ColorResult>()
   const [_tertiary, setTertiary] = useState<ColorResult>()
 
-  const primary = createColorObj(_primary?.hex ?? '#4e0001')
-  const secondary = createColorObj(_secondary?.hex ?? '#eeeeee')
-  const tertiary = createColorObj(_tertiary?.hex ?? '#daa520')
+  // const primary = createColorObj(_primary?.hex ?? '#4e0001')
+  // const secondary = createColorObj(_secondary?.hex ?? '#eeeeee')
+  // const tertiary = createColorObj(_tertiary?.hex ?? '#daa520')
+
+  const primary = createColorObj(_primary?.hex ?? '#19677d')
+  const secondary = createColorObj(_secondary?.hex ?? '#dab020')
+  const tertiary = createColorObj(_tertiary?.hex ?? '#ffffff')
 
   const white = new tinycolor('#eeeeee')
   const black = new tinycolor('#111111')

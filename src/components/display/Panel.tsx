@@ -1,17 +1,17 @@
 import { Avatar } from '@mui/material'
 import React from 'react'
 
-interface CodingAreaProps {
+interface PanelProps {
   theme: any
 }
 
-const CodingArea: React.FC<CodingAreaProps> = ({ theme }: CodingAreaProps) => (
-  <div id="coding-area" style={{ position: 'relative', width: '100%' }}>
+const Panel: React.FC<PanelProps> = ({ theme }: PanelProps) => (
+  <div id="coding-area" className="flex w-full overflow-hidden rounded border">
     <div
       style={{
-        position: 'absolute',
-        left: 0,
-        bottom: 0,
+        // position: 'absolute',
+        // left: 0,
+        // bottom: 0,
         background: theme['panel.background'],
         color: theme['panelTitle.activeForeground'],
         fontSize: '10px',
@@ -87,4 +87,4 @@ const CodingArea: React.FC<CodingAreaProps> = ({ theme }: CodingAreaProps) => (
   </div>
 )
 
-export default CodingArea
+export default Panel
