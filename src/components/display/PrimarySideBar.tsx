@@ -1,78 +1,75 @@
-import clsx from 'clsx'
 import React, { ComponentProps } from 'react'
 import { VscChevronDownCompact, VscKebabVertical } from 'react-icons/vsc'
 import { twMerge } from 'tailwind-merge'
+import { useTheme } from '../../lib/themeStore'
 
-interface SideBarProps {
-  theme: any
-}
+const PrimarySideBar: React.FC = () => {
+  const theme = useTheme()
 
-const PrimarySideBar: React.FC<SideBarProps> = ({ theme }: SideBarProps) => (
-  <div
-    className="w-75 overflow-hidden rounded p-2 text-xs"
-    style={{
-      backgroundColor: theme['sideBar.background'],
-      color: theme['sideBar.foreground'],
-    }}
-  >
-    <div className="mb-4 flex items-center justify-between">
-      <p>Explorer</p>
-      <VscKebabVertical />
-    </div>
-
+  return (
     <div
-      className="flex items-center gap-1 font-bold"
+      className="w-75 overflow-hidden rounded p-2 text-xs"
       style={{
-        color: theme['sideBarSectionHeader.foreground'],
+        backgroundColor: theme['sideBar.background'],
+        color: theme['sideBar.foreground'],
       }}
     >
-      <VscChevronDownCompact />
-      Open Editors
-    </div>
-    <div
-      className="mb-2 border-b border-white/10 pb-2"
-      style={{
-        borderColor: theme['activityBar.border'],
-      }}
-    >
-      <File theme={theme}>Inactive File 1</File>
-      <File active theme={theme}>
-        Active File
-      </File>
-      <File theme={theme}>Inactive File 2</File>
-      <File active selected theme={theme}>
+      <div className="mb-4 flex items-center justify-between">
+        <p>Explorer</p>
+        <VscKebabVertical />
+      </div>
+
+      <div
+        className="flex items-center gap-1 font-bold"
+        style={{
+          color: theme['sideBarSectionHeader.foreground'],
+        }}
+      >
+        <VscChevronDownCompact />
+        Open Editors
+      </div>
+      <div
+        className="mb-2 border-b border-white/10 pb-2"
+        style={{
+          borderColor: theme['activityBar.border'],
+        }}
+      >
+        <File>Inactive File 1</File>
+        <File active>Active File</File>
+        <File>Inactive File 2</File>
+        <File active selected>
+          Selected File
+        </File>
+        <File>Inactive File 3</File>
+      </div>
+      <div
+        className="flex items-center gap-1 font-bold"
+        style={{
+          color: theme['sideBarSectionHeader.foreground'],
+        }}
+      >
+        <VscChevronDownCompact />
+        Workspace
+      </div>
+      <File>Inactive File 1</File>
+      <File active>Active File</File>
+      <File>Inactive File 2</File>
+      <File active selected>
         Selected File
       </File>
-      <File theme={theme}>Inactive File 3</File>
+      <File>Inactive File 3</File>
     </div>
-    <div
-      className="flex items-center gap-1 font-bold"
-      style={{
-        color: theme['sideBarSectionHeader.foreground'],
-      }}
-    >
-      <VscChevronDownCompact />
-      Workspace
-    </div>
-    <File theme={theme}>Inactive File 1</File>
-    <File active theme={theme}>
-      Active File
-    </File>
-    <File theme={theme}>Inactive File 2</File>
-    <File active selected theme={theme}>
-      Selected File
-    </File>
-    <File theme={theme}>Inactive File 3</File>
-  </div>
-)
+  )
+}
 
 interface FileProps extends ComponentProps<'p'> {
   active?: boolean
   selected?: boolean
-  theme: any
 }
 
-const File = ({ theme, active, selected, children }: FileProps) => {
+const File = ({ active, selected, children }: FileProps) => {
+  const theme = useTheme()
+
   return (
     <p
       className={twMerge('rounded border border-transparent p-0.5 pl-4')}
