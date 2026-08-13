@@ -1,4 +1,5 @@
 import React, { ComponentProps } from 'react'
+import { VscChatSparkle, VscEditorLayout, VscGitMerge } from 'react-icons/vsc'
 import fileNames from '../../lib/fileNames'
 import { useTheme } from '../../lib/themeStore'
 
@@ -14,8 +15,8 @@ const Editor = () => {
         background: theme['editor.background'],
       }}
     >
-      <div className="flex w-full justify-between">
-        <div className="flex">
+      <div className="flex w-full justify-between p-1">
+        <div className="flex gap-2">
           <Tab>{openFiles[4]}</Tab>
           <Tab active>activeFile.ts</Tab>
           <Tab>{openFiles[1]}</Tab>
@@ -24,7 +25,11 @@ const Editor = () => {
           </Tab>
           <Tab>{openFiles[7]}</Tab>
         </div>
-        <div>BUTTONS</div>
+        <div className="text-md flex items-center gap-2 px-3 text-white">
+          <VscGitMerge />
+          <VscChatSparkle />
+          <VscEditorLayout />
+        </div>
       </div>
       <TextBlock />
     </div>
@@ -36,17 +41,17 @@ interface TabProps extends ComponentProps<'div'> {
   selected?: boolean
 }
 
-const Tab = ({ children }: TabProps) => {
+const Tab = ({ active, selected, children }: TabProps) => {
   const theme = useTheme()
   return (
     <div
-      className="rounded p-0.5"
+      className="text-bold rounded px-1 py-0.5 text-white/50"
 
-      style={
-        {
-          // color: theme['editor.background'],
-        }
-      }
+      style={{
+        color: selected ? 'white' : undefined,
+        backgroundColor: selected ? '#ffffff22' : undefined,
+        // color: theme['editor.background'],
+      }}
     >
       {children}
     </div>
