@@ -28,12 +28,12 @@ const createColorObj = (hex: string) => {
   }
 }
 
-const convertToStrings = <T extends Record<string, tinycolor.Instance>>(theme: T): { [K in keyof T]: string } =>
+const convertToStrings = (theme: Record<keyof Theme, tinycolor.Instance>): Theme =>
   Object.fromEntries(
     Object.entries(theme).map(([k, v]) => {
       return v.getAlpha() === 1 ? [k, v.toHexString()] : [k, v.toHex8String()]
     }),
-  ) as { [K in keyof T]: string }
+  ) as unknown as Theme
 
 export interface Theme {
   primary: string
@@ -49,6 +49,7 @@ export interface Theme {
   'badge.foreground': string
   'button.background': string
   'button.foreground': string
+  'button.hoverBackground': string
   'editor.background': string
   'focusBorder': string
   'foreground': string
@@ -57,6 +58,7 @@ export interface Theme {
   'list.focusBackground': string
   'list.hoverBackground': string
   'list.inactiveSelectionBackground': string
+  'menu.background': string
   'menu.foreground': string
   'panel.background': string
   'panelTitle.activeBorder': string
@@ -96,7 +98,7 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
   const text = primary.main.isLight() ? black : white
   const badgeText = tertiary.main.isLight() ? black : white
 
-  return convertToStrings({
+  const rawTheme: Record<keyof Theme, tinycolor.Instance> = {
     primary: primary.main,
     secondary: secondary.main,
     tertiary: tertiary.main,
@@ -109,6 +111,7 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'badge.background': tertiary.lightest,
     'badge.foreground': tertiary.darkest,
     'button.background': primary.light,
+    'button.hoverBackground': secondary.main,
     'button.foreground': text,
     'editor.background': primary.darkest,
     'focusBorder': primary.main,
@@ -144,7 +147,9 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'titleBar.activeForeground': secondary.main,
     'titleBar.inactiveBackground': primary.darkest,
     'titleBar.inactiveForeground': secondary.main.clone().setAlpha(0.6),
-  })
+  }
+
+  return convertToStrings(rawTheme)
 }
 
 interface ThemeState {

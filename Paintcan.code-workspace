@@ -19,6 +19,7 @@
       "badge.background": "#ffffff",
       "badge.foreground": "#1e1e1e",
       "button.background": "#1a677c",
+      "button.hoverBackground": "#dab020",
       "button.foreground": "#eeeeee",
       "editor.background": "#09242c",
       "focusBorder": "#114452",

@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ChromePicker } from 'react-color'
-import { VscCopy } from 'react-icons/vsc'
+import { VscCheck, VscCopy } from 'react-icons/vsc'
 import JSONPretty from 'react-json-pretty'
 import 'react-json-pretty/themes/acai.css'
 import './App.css'
@@ -8,6 +8,7 @@ import CodeDisplay from './components/CodeDisplay'
 import { useThemeStore } from './lib/themeStore'
 
 const App = () => {
+  const [copied, setCopied] = useState(false)
   const primary = useThemeStore(state => state.primary)
   const secondary = useThemeStore(state => state.secondary)
   const tertiary = useThemeStore(state => state.tertiary)
@@ -15,6 +16,10 @@ const App = () => {
   const setPrimary = useThemeStore(state => state.setPrimary)
   const setSecondary = useThemeStore(state => state.setSecondary)
   const setTertiary = useThemeStore(state => state.setTertiary)
+
+  useEffect(() => {
+    setCopied(false)
+  }, [theme])
 
   const code = {
     settings: {
@@ -24,7 +29,8 @@ const App = () => {
 
   const copyTheme = async () => {
     const settings = JSON.stringify(code.settings, null, 2)
-    await navigator.clipboard.writeText(settings.slice(1, -1))
+    await navigator.clipboard.writeText(settings.slice(1, -1) + ',')
+    setCopied(true)
   }
 
   return (
@@ -49,8 +55,8 @@ const App = () => {
       <div className="flex h-99/100 min-h-0 w-100 items-center">
         <div className="h-full w-full rounded bg-[#1e1e1e] p-2">
           <button className="flex items-center gap-1 rounded border border-white px-2 text-white" type="button" onClick={copyTheme}>
-            <VscCopy />
-            Copy
+            {copied ? <VscCheck /> : <VscCopy />}
+            <span aria-live="polite">{copied ? 'Copied' : 'Copy'}</span>
           </button>
           <JSONPretty data={code} className="w-full text-xs"></JSONPretty>
         </div>
