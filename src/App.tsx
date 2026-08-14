@@ -1,138 +1,67 @@
-import { Container, Stack } from '@mui/material'
-import React, { useState } from 'react'
-import { ChromePicker, ColorResult } from 'react-color'
+import React, { useEffect, useState } from 'react'
+import { ChromePicker } from 'react-color'
+import { VscCheck, VscCopy } from 'react-icons/vsc'
 import JSONPretty from 'react-json-pretty'
-import 'react-json-pretty/themes/monikai.css'
-import tinycolor from 'tinycolor2'
+import 'react-json-pretty/themes/acai.css'
 import './App.css'
 import CodeDisplay from './components/CodeDisplay'
+import { useThemeStore } from './lib/themeStore'
 
-const createColorObj = (hex: string) => {
-  let darkest = new tinycolor(hex)
-  let lightest = new tinycolor(hex)
-  while (darkest.getBrightness() > 30) {
-    darkest.darken(1)
-  }
+const App = () => {
+  const [copied, setCopied] = useState(false)
+  const primary = useThemeStore(state => state.primary)
+  const secondary = useThemeStore(state => state.secondary)
+  const tertiary = useThemeStore(state => state.tertiary)
+  const theme = useThemeStore(state => state.theme)
+  const setPrimary = useThemeStore(state => state.setPrimary)
+  const setSecondary = useThemeStore(state => state.setSecondary)
+  const setTertiary = useThemeStore(state => state.setTertiary)
 
-  while (lightest.getBrightness() < 80) {
-    lightest.lighten(1)
-  }
-
-  const main = new tinycolor(hex)
-  const dark = new tinycolor(hex).darken(10)
-  const light = new tinycolor(hex).lighten(10)
-
-  return {
-    main,
-    dark,
-    darkest,
-    light,
-    lightest,
-    hex: new tinycolor(hex).toHexString(),
-    darkHex: new tinycolor(hex).darken(10).toHexString(),
-    lightHex: new tinycolor(hex).darken(10).toHexString(),
-    darkestHex: darkest.desaturate(40).toHexString(),
-    lightestHex: lightest.desaturate(40).toHexString(),
-  }
-}
-
-const convertToStrings = (theme: { [k: string]: tinycolor.Instance }) =>
-  Object.fromEntries(
-    Object.entries(theme).map(([k, v]) => {
-      return v.getAlpha() === 1 ? [k, v.toHexString()] : [k, v.toHex8String()]
-    }),
-  )
-
-const App: React.FC = () => {
-  const [_primary, setPrimary] = useState<ColorResult>()
-  const [_secondary, setSecondary] = useState<ColorResult>()
-  const [_tertiary, setTertiary] = useState<ColorResult>()
-
-  const primary = createColorObj(_primary?.hex ?? '#4e0001')
-  const secondary = createColorObj(_secondary?.hex ?? '#eeeeee')
-  const tertiary = createColorObj(_tertiary?.hex ?? '#daa520')
-
-  const white = new tinycolor('#eeeeee')
-  const black = new tinycolor('#111111')
-
-  const text = primary.main.isLight() ? black : white
-  const badgeText = tertiary.main.isLight() ? black : white
-
-  const theme = {
-    primary: primary.main,
-    secondary: secondary.main,
-    tertiary: tertiary.main,
-    'activityBar.background': primary.main,
-    'activityBar.foreground': secondary.main,
-    'activityBar.inactiveForeground': secondary.main.clone().setAlpha(0.6),
-    'activityBarBadge.background': tertiary.main,
-    'activityBarBadge.foreground': badgeText,
-    'badge.background': tertiary.lightest,
-    'badge.foreground': tertiary.darkest,
-    'list.activeSelectionBackground': secondary.dark.clone().setAlpha(0.4),
-    'list.focusBackground': secondary.darkest.clone().setAlpha(0.4),
-    'list.hoverBackground': secondary.darkest.clone().setAlpha(0.4),
-    'list.inactiveSelectionBackground': secondary.dark.clone().setAlpha(0.2),
-    'panel.background': primary.darkest,
-    'panelTitle.activeBorder': tertiary.main,
-    'panelTitle.activeForeground': secondary.main,
-    'sideBar.background': primary.darkest,
-    'sideBar.foreground': white,
-    'sideBarSectionHeader.background': primary.main,
-    'sideBarSectionHeader.foreground': text,
-    'statusBar.background': primary.dark,
-    'statusBar.foreground': secondary.main,
-    'statusBarItem.hoverBackground': primary.main,
-    'tab.activeBorder': primary.main,
-    'terminal.background': primary.darkest.clone().darken(5),
-    'titleBar.activeBackground': primary.dark,
-    'titleBar.activeForeground': secondary.main,
-    'titleBar.inactiveBackground': primary.dark.clone().setAlpha(0.6),
-    'titleBar.inactiveForeground': secondary.main.clone().setAlpha(0.6),
-  }
+  useEffect(() => {
+    setCopied(false)
+  }, [theme])
 
   const code = {
     settings: {
-      'workbench.colorCustomizations': convertToStrings(theme),
+      'workbench.colorCustomizations': theme,
     },
   }
 
+  const copyTheme = async () => {
+    const settings = JSON.stringify(code.settings, null, 2)
+    await navigator.clipboard.writeText(settings.slice(1, -1) + ',')
+    setCopied(true)
+  }
+
   return (
-    <Container style={{ padding: '5rem' }}>
-      {/* top half */}
-      <Stack direction={'row'} justifyContent={'space-around'} style={{ marginBottom: '2rem' }}>
-        <ChromePicker
-          disableAlpha
-          color={primary?.hex}
-          onChange={(c) => {
-            setPrimary(c)
-          }}
-        />
-        <ChromePicker
-          disableAlpha
-          color={secondary?.hex}
-          onChange={(c) => {
-            setSecondary(c)
-          }}
-        />
-        <ChromePicker
-          disableAlpha
-          color={tertiary?.hex}
-          onChange={(c) => {
-            setTertiary(c)
-          }}
-        />
-      </Stack>
-      <Stack direction={'row'} spacing={5}>
-        <CodeDisplay theme={convertToStrings(theme)} />
-        <div style={{ backgroundColor: '#272822' }}>
-          <JSONPretty
-            data={code}
-            style={{ paddingLeft: '1rem', paddingRight: '3rem', margin: 0 }}
-          ></JSONPretty>
+    <div className="grid h-screen w-full grid-cols-[auto_1fr_auto] items-center gap-2 overflow-hidden bg-[#1e1e1e]">
+      <div className="flex h-99/100 min-h-0 w-60 flex-col items-center justify-center gap-10 overflow-y-auto text-white">
+        <div className="text-center font-bold">
+          <h1>Primary</h1>
+          <ChromePicker disableAlpha color={primary} onChange={c => setPrimary(c.hex)} />
         </div>
-      </Stack>
-    </Container>
+        <div className="text-center font-bold">
+          <h1>Secondary</h1>
+          <ChromePicker disableAlpha color={secondary} onChange={c => setSecondary(c.hex)} />
+        </div>
+        <div className="text-center font-bold">
+          <h1>Tertiary</h1>
+          <ChromePicker disableAlpha color={tertiary} onChange={c => setTertiary(c.hex)} />
+        </div>
+      </div>
+      <div className="flex h-99/100 min-h-0 min-w-0 flex-1 items-center">
+        <CodeDisplay />
+      </div>
+      <div className="flex h-99/100 min-h-0 w-100 items-center">
+        <div className="h-full w-full rounded bg-[#1e1e1e] p-2">
+          <button className="flex w-25 items-center gap-1 rounded border border-white/50 px-2 text-white" type="button" onClick={copyTheme}>
+            {copied ? <VscCheck /> : <VscCopy />}
+            <span aria-live="polite">{copied ? 'Copied' : 'Copy'}</span>
+          </button>
+          <JSONPretty data={code} className="w-full text-xs"></JSONPretty>
+        </div>
+      </div>
+    </div>
   )
 }
 
