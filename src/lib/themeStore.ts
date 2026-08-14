@@ -55,11 +55,13 @@ export interface Theme {
   'list.focusBackground': string
   'list.hoverBackground': string
   'list.inactiveSelectionBackground': string
+  'menu.foreground': string
   'panel.background': string
   'panelTitle.activeBorder': string
   'panelTitle.activeForeground': string
   'panelTitle.inactiveForeground': string
-  'menu.foreground': string
+  'panelTitleBadge.background': string
+  'panelTitleBadge.foreground': string
   'sideBar.background': string
   'sideBar.foreground': string
   'sideBarSectionHeader.background': string
@@ -90,7 +92,7 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     primary: primary.main,
     secondary: secondary.main,
     tertiary: tertiary.main,
-    'activityBar.background': primary.main,
+    'activityBar.background': primary.dark,
     'activityBar.foreground': secondary.main,
     'activityBar.inactiveForeground': secondary.main.clone().setAlpha(0.6),
     'activityBar.border': primary.dark,
@@ -107,7 +109,9 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'panel.background': primary.darkest,
     'panelTitle.activeBorder': tertiary.main, //panel tabs
     'panelTitle.activeForeground': secondary.main, //panel tabs
-    'panelTitle.inactiveForeground': secondary.main.clone().setAlpha(0.6), //panel tabs
+    'panelTitle.inactiveForeground': secondary.main.clone().setAlpha(0.6).desaturate(75), //panel tabs
+    'panelTitleBadge.background': tertiary.main,
+    'panelTitleBadge.foreground': badgeText,
     'menu.foreground': white,
     'menu.background': primary.darkest,
     'sideBar.background': primary.darkest,
@@ -121,7 +125,7 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'terminal.background': primary.darkest.clone().darken(5),
     'titleBar.activeBackground': primary.dark,
     'titleBar.activeForeground': secondary.main,
-    'titleBar.inactiveBackground': primary.dark.clone().setAlpha(0.6),
+    'titleBar.inactiveBackground': primary.darkest,
     'titleBar.inactiveForeground': secondary.main.clone().setAlpha(0.6),
   })
 }
