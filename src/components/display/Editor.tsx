@@ -1,5 +1,7 @@
 import React, { ComponentProps } from 'react'
-import { VscChatSparkle, VscEditorLayout, VscGitMerge } from 'react-icons/vsc'
+import { VscChatSparkle, VscChevronRightCompact, VscEditorLayout, VscGitMerge } from 'react-icons/vsc'
+import tinycolor from 'tinycolor2'
+import { darkForeground } from '../../lib/adHocColors'
 import fileNames from '../../lib/fileNames'
 import { useTheme } from '../../lib/themeStore'
 
@@ -10,9 +12,10 @@ const Editor = () => {
 
   return (
     <div
-      className="flex h-full min-h-0 flex-col overflow-hidden rounded"
+      className="flex h-full min-h-0 flex-col overflow-hidden rounded border"
       style={{
         background: theme['editor.background'],
+        borderColor: theme['surface.border'],
       }}
     >
       <div className="flex w-full shrink-0 justify-between p-1">
@@ -31,6 +34,13 @@ const Editor = () => {
           <VscEditorLayout />
         </div>
       </div>
+      <div className="flex items-center px-3" style={{ color: theme['foreground'] }}>
+        src
+        <VscChevronRightCompact />
+        components
+        <VscChevronRightCompact />
+        selectedFile.tsx
+      </div>
       <TextBlock />
     </div>
   )
@@ -42,15 +52,13 @@ interface TabProps extends ComponentProps<'div'> {
 }
 
 const Tab = ({ active, selected, children }: TabProps) => {
-  const theme = useTheme()
   return (
     <div
-      className="text-bold rounded px-1 py-0.5 text-white/50"
+      className="rounded px-1 py-0.5 font-bold text-white/50"
 
       style={{
         color: selected ? 'white' : undefined,
-        backgroundColor: selected ? '#ffffff22' : undefined,
-        // color: theme['editor.background'],
+        backgroundColor: selected ? darkForeground() : undefined,
       }}
     >
       {children}
@@ -60,7 +68,7 @@ const Tab = ({ active, selected, children }: TabProps) => {
 
 const TextBlock = () => {
   return (
-    <div className="flex w-full min-w-0 flex-1 overflow-hidden rounded p-4 font-mono text-xs text-white">
+    <div className="flex w-full min-w-0 flex-1 overflow-hidden rounded px-4 font-mono text-xs text-white">
       <pre className="min-w-0 overflow-hidden whitespace-pre">
         {`import React, { useMemo, useState } from 'react'
 

@@ -18,7 +18,7 @@ const CodeDisplay = () => {
         <div className="flex min-h-0 gap-2 p-2">
           <ActivityBar />
           <PrimarySideBar />
-          <div className="flex min-h-0 w-full min-w-0 flex-col gap-2">
+          <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-2">
             <div className="min-h-0 min-w-0 flex-1">
               <Editor />
             </div>

@@ -42,15 +42,19 @@ export interface Theme {
   secondary: string
   tertiary: string
   'activityBar.background': string
+  'activityBar.border': string
   'activityBar.foreground': string
   'activityBar.inactiveForeground': string
-  'activityBar.border': string
   'activityBarBadge.background': string
   'activityBarBadge.foreground': string
   'badge.background': string
   'badge.foreground': string
+  'button.background': string
+  'button.foreground': string
   'editor.background': string
-  focusBorder: string
+  'focusBorder': string
+  'foreground': string
+  'input.background': string
   'list.activeSelectionBackground': string
   'list.focusBackground': string
   'list.hoverBackground': string
@@ -69,6 +73,11 @@ export interface Theme {
   'statusBar.background': string
   'statusBar.foreground': string
   'statusBarItem.hoverBackground': string
+  'statusBarItem.remoteBackground': string
+  'statusBarItem.remoteForeground': string
+  'statusBarItem.remoteHoverBackground': string
+  'statusBarItem.remoteHoverForeground': string
+  'surface.border': string
   'tab.activeBorder': string
   'terminal.background': string
   'titleBar.activeBackground': string
@@ -84,6 +93,7 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
 
   const white = new tinycolor('#eeeeee')
   const black = new tinycolor('#111111')
+  const magenta = new tinycolor('#ff00ff')
 
   const text = primary.main.isLight() ? black : white
   const badgeText = tertiary.main.isLight() ? black : white
@@ -93,27 +103,31 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     secondary: secondary.main,
     tertiary: tertiary.main,
     'activityBar.background': primary.dark,
+    'activityBar.border': primary.dark,
     'activityBar.foreground': secondary.main,
     'activityBar.inactiveForeground': secondary.main.clone().setAlpha(0.6),
-    'activityBar.border': primary.dark,
     'activityBarBadge.background': tertiary.main,
     'activityBarBadge.foreground': badgeText,
     'badge.background': tertiary.lightest,
     'badge.foreground': tertiary.darkest,
+    'button.background': primary.light,
+    'button.foreground': text,
     'editor.background': primary.darkest,
-    focusBorder: primary.main,
+    'focusBorder': primary.main,
+    'foreground': primary.light, //text,
+    'input.background': primary.dark,
     'list.activeSelectionBackground': secondary.dark.clone().setAlpha(0.4),
     'list.focusBackground': secondary.darkest.clone().setAlpha(0.4),
     'list.hoverBackground': secondary.darkest.clone().setAlpha(0.4),
     'list.inactiveSelectionBackground': secondary.dark.clone().setAlpha(0.2),
+    'menu.background': primary.darkest,
+    'menu.foreground': white,
     'panel.background': primary.darkest,
     'panelTitle.activeBorder': tertiary.main, //panel tabs
     'panelTitle.activeForeground': secondary.main, //panel tabs
     'panelTitle.inactiveForeground': secondary.main.clone().setAlpha(0.6).desaturate(75), //panel tabs
     'panelTitleBadge.background': tertiary.main,
     'panelTitleBadge.foreground': badgeText,
-    'menu.foreground': white,
-    'menu.background': primary.darkest,
     'sideBar.background': primary.darkest,
     'sideBar.foreground': white,
     'sideBarSectionHeader.background': primary.main,
@@ -121,6 +135,11 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'statusBar.background': primary.dark,
     'statusBar.foreground': secondary.main,
     'statusBarItem.hoverBackground': primary.main,
+    'statusBarItem.remoteBackground': white,
+    'statusBarItem.remoteForeground': black,
+    'statusBarItem.remoteHoverBackground': black,
+    'statusBarItem.remoteHoverForeground': white,
+    'surface.border': primary.light,
     'tab.activeBorder': primary.main,
     'terminal.background': primary.darkest.clone().darken(5),
     'titleBar.activeBackground': primary.dark,

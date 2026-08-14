@@ -43,7 +43,7 @@ const App = () => {
           <ChromePicker disableAlpha color={tertiary} onChange={c => setTertiary(c.hex)} />
         </div>
       </div>
-      <div className="flex h-99/100 min-h-0 w-full items-center">
+      <div className="flex h-99/100 min-h-0 min-w-0 flex-1 items-center">
         <CodeDisplay />
       </div>
       <div className="flex h-99/100 min-h-0 w-100 items-center">

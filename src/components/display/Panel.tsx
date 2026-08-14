@@ -1,21 +1,23 @@
 import { ComponentProps } from 'react'
 import { VscAddCompact, VscChevronDownCompact, VscCloseCompact } from 'react-icons/vsc'
+import tinycolor from 'tinycolor2'
+import { darkForeground } from '../../lib/adHocColors'
 import { useTheme } from '../../lib/themeStore'
 
 const Panel = () => {
   const theme = useTheme()
 
   return (
-    <div id="bottom-panel" className="flex h-full w-full flex-col overflow-hidden rounded">
+    <div id="bottom-panel" className="flex h-full w-full flex-col overflow-hidden rounded border" style={{ borderColor: theme['surface.border'] }}>
       <div className="flex items-center justify-between p-1 text-xs font-bold" style={{ backgroundColor: theme['panel.background'] }}>
         <div className="flex gap-2">
-          <Tab selected>Terminal</Tab>
+          <PanelTab selected>Terminal</PanelTab>
           <div className="flex items-center">
-            <Tab>Problems</Tab>
+            <PanelTab>Problems</PanelTab>
             <Badge />
           </div>
-          <Tab>Output</Tab>
-          <Tab>Console</Tab>
+          <PanelTab>Output</PanelTab>
+          <PanelTab>Console</PanelTab>
         </div>
         <div className="text-md flex gap-2 text-white">
           <VscAddCompact />
@@ -40,16 +42,16 @@ interface TabProps extends ComponentProps<'div'> {
   selected?: boolean
 }
 
-const Tab = ({ active, selected, children }: TabProps) => {
+export const PanelTab = ({ active, selected, children }: TabProps) => {
   const theme = useTheme()
+  const bgColor = new tinycolor(theme['foreground']).setAlpha(0.3).toHex8String()
   return (
     <div
       className="flex items-center rounded px-1 py-0.5 font-bold"
 
       style={{
         color: selected ? theme['panelTitle.activeForeground'] : theme['panelTitle.inactiveForeground'],
-        backgroundColor: selected ? '#ffffff22' : undefined,
-        // color: theme['editor.background'],
+        backgroundColor: selected ? darkForeground() : undefined,
       }}
     >
       {children}

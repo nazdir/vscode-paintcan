@@ -9,7 +9,7 @@ const ActivityBar = () => {
   return (
     <div
       id="activity-bar"
-      className="flex h-full w-10 flex-col items-center justify-between overflow-hidden rounded p-1 pb-2 text-xl"
+      className="flex h-full w-5 flex-col items-center justify-between overflow-hidden rounded p-1 pb-2 text-xl"
       style={{
         backgroundColor: theme['activityBar.background'],
         color: theme['activityBar.inactiveForeground'],

@@ -11,10 +11,11 @@ const PrimarySideBar = () => {
 
   return (
     <div
-      className="w-75 overflow-hidden rounded p-2 text-xs"
+      className="w-75 overflow-hidden rounded border p-2 text-xs"
       style={{
         backgroundColor: theme['sideBar.background'],
         color: theme['sideBar.foreground'],
+        borderColor: theme['surface.border'],
       }}
     >
       <div className="mb-4 flex items-center justify-between">
