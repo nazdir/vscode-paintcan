@@ -25,8 +25,6 @@ const createColorObj = (hex: string) => {
     hex: new tinycolor(hex).toHexString(),
     darkHex: new tinycolor(hex).darken(10).toHexString(),
     lightHex: new tinycolor(hex).darken(10).toHexString(),
-    darkestHex: darkest.desaturate(40).toHexString(),
-    lightestHex: lightest.desaturate(40).toHexString(),
   }
 }
 
@@ -102,8 +100,8 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     primary: primary.main,
     secondary: secondary.main,
     tertiary: tertiary.main,
-    'activityBar.background': primary.dark,
-    'activityBar.border': primary.dark,
+    'activityBar.background': primary.main,
+    'activityBar.border': primary.main,
     'activityBar.foreground': secondary.main,
     'activityBar.inactiveForeground': secondary.main.clone().setAlpha(0.6),
     'activityBarBadge.background': tertiary.main,
@@ -114,7 +112,7 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'button.foreground': text,
     'editor.background': primary.darkest,
     'focusBorder': primary.main,
-    'foreground': primary.light, //text,
+    'foreground': text, //text,
     'input.background': primary.dark,
     'list.activeSelectionBackground': secondary.dark.clone().setAlpha(0.4),
     'list.focusBackground': secondary.darkest.clone().setAlpha(0.4),
@@ -132,17 +130,17 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'sideBar.foreground': white,
     'sideBarSectionHeader.background': primary.main,
     'sideBarSectionHeader.foreground': text,
-    'statusBar.background': primary.dark,
+    'statusBar.background': primary.main,
     'statusBar.foreground': secondary.main,
     'statusBarItem.hoverBackground': primary.main,
-    'statusBarItem.remoteBackground': white,
-    'statusBarItem.remoteForeground': black,
-    'statusBarItem.remoteHoverBackground': black,
-    'statusBarItem.remoteHoverForeground': white,
-    'surface.border': primary.light,
+    'statusBarItem.remoteBackground': primary.dark,
+    'statusBarItem.remoteForeground': secondary.main,
+    'statusBarItem.remoteHoverBackground': secondary.main,
+    'statusBarItem.remoteHoverForeground': primary.main,
+    'surface.border': primary.main,
     'tab.activeBorder': primary.main,
     'terminal.background': primary.darkest.clone().darken(5),
-    'titleBar.activeBackground': primary.dark,
+    'titleBar.activeBackground': primary.main,
     'titleBar.activeForeground': secondary.main,
     'titleBar.inactiveBackground': primary.darkest,
     'titleBar.inactiveForeground': secondary.main.clone().setAlpha(0.6),
@@ -160,7 +158,7 @@ interface ThemeState {
 }
 
 const defaults = {
-  primary: '#19677d',
+  primary: '#114452',
   secondary: '#dab020',
   tertiary: '#ffffff',
 }

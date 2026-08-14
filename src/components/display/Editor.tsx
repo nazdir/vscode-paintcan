@@ -52,12 +52,13 @@ interface TabProps extends ComponentProps<'div'> {
 }
 
 const Tab = ({ active, selected, children }: TabProps) => {
+  const theme = useTheme()
   return (
     <div
       className="rounded px-1 py-0.5 font-bold text-white/50"
 
       style={{
-        color: selected ? 'white' : undefined,
+        color: selected ? theme['foreground'] : darkForeground(),
         backgroundColor: selected ? darkForeground() : undefined,
       }}
     >
