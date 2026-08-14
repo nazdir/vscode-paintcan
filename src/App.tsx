@@ -54,7 +54,7 @@ const App = () => {
       </div>
       <div className="flex h-99/100 min-h-0 w-100 items-center">
         <div className="h-full w-full rounded bg-[#1e1e1e] p-2">
-          <button className="flex items-center gap-1 rounded border border-white px-2 text-white" type="button" onClick={copyTheme}>
+          <button className="flex w-25 items-center gap-1 rounded border border-white/50 px-2 text-white" type="button" onClick={copyTheme}>
             {copied ? <VscCheck /> : <VscCopy />}
             <span aria-live="polite">{copied ? 'Copied' : 'Copy'}</span>
           </button>
