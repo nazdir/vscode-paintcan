@@ -23,8 +23,6 @@ const createColorObj = (hex: string) => {
     light,
     lightest,
     hex: new tinycolor(hex).toHexString(),
-    darkHex: new tinycolor(hex).darken(10).toHexString(),
-    lightHex: new tinycolor(hex).darken(10).toHexString(),
   }
 }
 
@@ -110,8 +108,8 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'activityBarBadge.foreground': badgeText,
     'badge.background': tertiary.lightest,
     'badge.foreground': tertiary.darkest,
-    'button.background': primary.light,
-    'button.hoverBackground': secondary.main,
+    'button.background': primary.main,
+    'button.hoverBackground': primary.light,
     'button.foreground': text,
     'editor.background': primary.darkest,
     'focusBorder': primary.main,
