@@ -2,13 +2,26 @@ import tinycolor from 'tinycolor2'
 import { create } from 'zustand'
 
 const createColorObj = (hex: string) => {
+  const darker = new tinycolor(hex)
+  const lighter = new tinycolor(hex)
   const darkest = new tinycolor(hex)
   const lightest = new tinycolor(hex)
-  while (darkest.getBrightness() > 30) {
+
+  while (darker.getBrightness() > 30) {
+    darker.darken(1)
     darkest.darken(1)
   }
 
-  while (lightest.getBrightness() < 80) {
+  while (lighter.getBrightness() < 80) {
+    lighter.lighten(1)
+    lightest.lighten(1)
+  }
+
+  while (darkest.getBrightness() > 20) {
+    darkest.darken(1)
+  }
+
+  while (lightest.getBrightness() < 90) {
     lightest.lighten(1)
   }
 
@@ -19,8 +32,10 @@ const createColorObj = (hex: string) => {
   return {
     main,
     dark,
+    darker,
     darkest,
     light,
+    lighter,
     lightest,
     hex: new tinycolor(hex).toHexString(),
   }
@@ -106,28 +121,28 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'activityBar.inactiveForeground': secondary.main.clone().setAlpha(0.6),
     'activityBarBadge.background': tertiary.main,
     'activityBarBadge.foreground': badgeText,
-    'badge.background': tertiary.lightest,
-    'badge.foreground': tertiary.darkest,
+    'badge.background': tertiary.lighter,
+    'badge.foreground': tertiary.darker,
     'button.background': primary.main,
     'button.hoverBackground': primary.light,
     'button.foreground': text,
     'editor.background': primary.darkest,
     'focusBorder': primary.main,
     'foreground': text, //text,
-    'input.background': primary.dark,
+    'input.background': primary.darkest,
     'list.activeSelectionBackground': secondary.dark.clone().setAlpha(0.4),
-    'list.focusBackground': secondary.darkest.clone().setAlpha(0.4),
-    'list.hoverBackground': secondary.darkest.clone().setAlpha(0.4),
+    'list.focusBackground': secondary.darker.clone().setAlpha(0.4),
+    'list.hoverBackground': secondary.darker.clone().setAlpha(0.4),
     'list.inactiveSelectionBackground': secondary.dark.clone().setAlpha(0.2),
-    'menu.background': primary.darkest,
+    'menu.background': primary.darker,
     'menu.foreground': white,
-    'panel.background': primary.darkest,
+    'panel.background': primary.darker,
     'panelTitle.activeBorder': tertiary.main, //panel tabs
     'panelTitle.activeForeground': secondary.main, //panel tabs
     'panelTitle.inactiveForeground': secondary.main.clone().setAlpha(0.6).desaturate(75), //panel tabs
     'panelTitleBadge.background': tertiary.main,
     'panelTitleBadge.foreground': badgeText,
-    'sideBar.background': primary.darkest,
+    'sideBar.background': primary.darker,
     'sideBar.foreground': white,
     'sideBarSectionHeader.background': primary.main,
     'sideBarSectionHeader.foreground': text,
@@ -140,10 +155,10 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'statusBarItem.remoteHoverForeground': primary.main,
     'surface.border': primary.main,
     'tab.activeBorder': primary.main,
-    'terminal.background': primary.darkest.clone().darken(5),
+    'terminal.background': primary.darkest,
     'titleBar.activeBackground': primary.main,
     'titleBar.activeForeground': secondary.main,
-    'titleBar.inactiveBackground': primary.darkest,
+    'titleBar.inactiveBackground': primary.darker,
     'titleBar.inactiveForeground': secondary.main.clone().setAlpha(0.6),
   }
 
@@ -161,9 +176,9 @@ interface ThemeState {
 }
 
 const defaults = {
-  primary: '#114452',
-  secondary: '#dab020',
-  tertiary: '#ffffff',
+  primary: '#4e0001',
+  secondary: '#eeeeee',
+  tertiary: '#daa520',
 }
 
 export const useThemeStore = create<ThemeState>(set => ({
