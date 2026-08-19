@@ -28,8 +28,8 @@ const Editor = () => {
           </Tab>
           <Tab>{openFiles[7]}</Tab>
         </div>
-        <div className="text-md flex items-center gap-2 px-3 text-white">
-          <VscGitMerge />
+        <div className="text-md flex items-center gap-2 px-3" style={{ color: theme['icon.foreground'] }}>
+          <VscGitMerge color={theme['icon.foreground']} />
           <VscChatSparkle />
           <VscEditorLayout />
         </div>
@@ -58,8 +58,8 @@ const Tab = ({ active, selected, children }: TabProps) => {
       className="rounded px-1 py-0.5 font-bold text-white/50"
 
       style={{
-        color: selected ? theme['foreground'] : darkForeground(),
-        backgroundColor: selected ? darkForeground() : undefined,
+        color: selected ? theme['modernEditorTab.activeForeground'] : darkForeground(),
+        backgroundColor: selected ? theme['modernEditorTab.activeBackground'] : theme['modernEditorTab.inactiveBackground'],
       }}
     >
       {children}

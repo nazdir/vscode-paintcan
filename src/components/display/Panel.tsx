@@ -19,7 +19,7 @@ const Panel = () => {
           <PanelTab>Output</PanelTab>
           <PanelTab>Console</PanelTab>
         </div>
-        <div className="text-md flex gap-2 text-white">
+        <div className="text-md flex gap-2" style={{ color: theme['icon.foreground'] }}>
           <VscAddCompact />
           <VscChevronDownCompact />
           <VscCloseCompact />
@@ -51,7 +51,7 @@ export const PanelTab = ({ active, selected, children }: TabProps) => {
 
       style={{
         color: selected ? theme['panelTitle.activeForeground'] : theme['panelTitle.inactiveForeground'],
-        backgroundColor: selected ? darkForeground() : undefined,
+        backgroundColor: selected ? theme['modernTab.activeBackground'] : undefined,
       }}
     >
       {children}

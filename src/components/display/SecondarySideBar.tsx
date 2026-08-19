@@ -15,7 +15,7 @@ const SecondarySideBar = () => {
           <PanelTab selected>GitHub</PanelTab>
           <PanelTab>Chat</PanelTab>
         </div>
-        <div className="text-md flex gap-2 text-white">
+        <div className="text-md flex gap-2" style={{ color: theme['icon.foreground'] }}>
           <VscAddCompact />
           <VscCodeOss />
           <VscCloseCompact />

@@ -16,7 +16,7 @@ const ActivityBar = () => {
       }}
     >
       <div className="flex flex-col gap-4">
-        <VscFiles style={{ color: theme['activityBar.foreground'] }} />
+        <VscFiles className="rounded p-0.5" style={{ color: theme['modernActivityBar.activeForeground'], backgroundColor: theme['modernActivityBar.activeBackground'] }} />
         <VscSearch />
         <div className="relative">
           <VscSourceControl />

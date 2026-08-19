@@ -20,7 +20,7 @@ const PrimarySideBar = () => {
     >
       <div className="mb-4 flex items-center justify-between">
         <p>Explorer</p>
-        <VscKebabVertical />
+        <VscKebabVertical color={theme['icon.foreground']} />
       </div>
 
       <div
@@ -29,15 +29,10 @@ const PrimarySideBar = () => {
           color: theme['sideBarSectionHeader.foreground'],
         }}
       >
-        <VscChevronDownCompact />
+        <VscChevronDownCompact color={theme['icon.foreground']} />
         Open Editors
       </div>
-      <div
-        className="mb-2 border-b border-white/10 pb-2"
-        style={{
-          borderColor: theme['activityBar.border'],
-        }}
-      >
+      <div className="mb-2 border-b border-white/10 pb-2">
         <File>{openFiles[4]}.ts</File>
         <File active>activeFile.ts</File>
         <File>{openFiles[1]}.ts</File>
@@ -52,7 +47,7 @@ const PrimarySideBar = () => {
           color: theme['sideBarSectionHeader.foreground'],
         }}
       >
-        <VscChevronDownCompact />
+        <VscChevronDownCompact color={theme['icon.foreground']} />
         Workspace
       </div>
       {fileNames.map(name => (
@@ -77,7 +72,6 @@ const File = ({ active, selected, children }: FileProps) => {
       className={twMerge('rounded border border-transparent p-0.5 pl-4')}
       style={{
         background: active && selected ? theme['list.activeSelectionBackground'] : active ? theme['list.inactiveSelectionBackground'] : undefined,
-        borderColor: active && selected ? theme['focusBorder'] : undefined,
       }}
     >
       {children}
