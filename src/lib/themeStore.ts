@@ -69,12 +69,13 @@ export interface Theme {
   'activityBarBadge.foreground': string
   'badge.background': string
   'badge.foreground': string
+  'breadcrumb.foreground': string
   'button.background': string
   'button.foreground': string
   'button.hoverBackground': string
   'editor.background': string
   // 'focusBorder': string //? not used
-  'foreground': string
+  // 'foreground': string //* don't want
   'icon.foreground': string
   'input.background': string
   'list.activeSelectionBackground': string
@@ -205,8 +206,9 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'button.hoverBackground': primary.light,
     'button.foreground': readableOnMain,
     'editor.background': primary.darkest,
-    'foreground': createReadable(primary.darkest, primary.light), //text,
-    'icon.foreground': primary.main.isDark() ? primary.light : primary.dark,
+    // 'foreground': createReadable(primary.darkest, primary.light), //text,
+    'breadcrumb.foreground': createReadable(primary.darkest, primary.light), //text,
+    'icon.foreground': primary.main.isDark() ? secondary.light : secondary.dark,
     'input.background': primary.darkest,
     'list.activeSelectionBackground': primary.light.clone().setAlpha(0.4),
     'list.focusBackground': primary.lighter.clone().setAlpha(0.4),

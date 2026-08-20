@@ -1,7 +1,5 @@
-import React, { ComponentProps } from 'react'
+import { ComponentProps } from 'react'
 import { VscChatSparkle, VscChevronRightCompact, VscEditorLayout, VscGitMerge } from 'react-icons/vsc'
-import tinycolor from 'tinycolor2'
-import { darkForeground } from '../../lib/adHocColors'
 import fileNames from '../../lib/fileNames'
 import { useTheme } from '../../lib/themeStore'
 
@@ -34,7 +32,7 @@ const Editor = () => {
           <VscEditorLayout />
         </div>
       </div>
-      <div className="flex items-center px-3" style={{ color: theme['foreground'] }}>
+      <div className="flex items-center px-3" style={{ color: theme['breadcrumb.foreground'] }}>
         src
         <VscChevronRightCompact />
         components
@@ -58,7 +56,7 @@ const Tab = ({ active, selected, children }: TabProps) => {
       className="rounded px-1 py-0.5 font-bold text-white/50"
 
       style={{
-        color: selected ? theme['modernEditorTab.activeForeground'] : darkForeground(),
+        color: selected ? theme['modernEditorTab.activeForeground'] : undefined,
         backgroundColor: selected ? theme['modernEditorTab.activeBackground'] : theme['modernEditorTab.inactiveBackground'],
       }}
     >

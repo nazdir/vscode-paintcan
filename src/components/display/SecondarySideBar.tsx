@@ -1,7 +1,6 @@
 import { ComponentProps } from 'react'
 import { VscAddCompact, VscCloseCompact, VscCodeOss, VscGitCompare, VscMerge } from 'react-icons/vsc'
 import { twMerge } from 'tailwind-merge'
-import { darkForeground } from '../../lib/adHocColors'
 import { useTheme } from '../../lib/themeStore'
 import { PanelTab } from './Panel'
 
@@ -23,12 +22,12 @@ const SecondarySideBar = () => {
       </div>
       <div className="flex w-full flex-col gap-2 px-2 text-white">
         <div className="flex items-center gap-2 text-xs">
-          <VscGitCompare color={theme['foreground']} />
+          <VscGitCompare />
           BASE
           <Input>main</Input>
         </div>
         <div className="flex items-center gap-2 text-xs">
-          <VscMerge color={theme['foreground']} />
+          <VscMerge />
           MERGE
           <Input>paintcan</Input>
         </div>
@@ -42,9 +41,7 @@ const SecondarySideBar = () => {
           <Input selected>Themes the VSCode window to allow the user to easily tell repos apart while working on multiple ones</Input>
         </div>
         <div className="flex items-center gap-2">
-          <div className="rounded border p-1 text-center" style={{ borderColor: darkForeground() }}>
-            Cancel
-          </div>
+          <div className="rounded border p-1 text-center">Cancel</div>
           <div className="w-full rounded border border-transparent p-1 text-center" style={{ backgroundColor: theme['button.background'], color: theme['button.foreground'] }}>
             Create
           </div>
@@ -61,7 +58,7 @@ interface InputProps extends ComponentProps<'div'> {
 const Input = ({ selected, className, children }: InputProps) => {
   const theme = useTheme()
   return (
-    <div className={twMerge('flex w-46 rounded px-3 py-1 text-xs', selected ? 'border' : '', className)} style={{ backgroundColor: theme['input.background'], borderColor: theme['focusBorder'] }}>
+    <div className={twMerge('flex w-46 rounded px-3 py-1 text-xs', selected ? 'border' : '', className)} style={{ backgroundColor: theme['input.background'] }}>
       {children}
     </div>
   )

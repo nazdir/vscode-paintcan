@@ -1,7 +1,5 @@
 import { ComponentProps } from 'react'
 import { VscAddCompact, VscChevronDownCompact, VscCloseCompact } from 'react-icons/vsc'
-import tinycolor from 'tinycolor2'
-import { darkForeground } from '../../lib/adHocColors'
 import { useTheme } from '../../lib/themeStore'
 
 const Panel = () => {
@@ -44,7 +42,6 @@ interface TabProps extends ComponentProps<'div'> {
 
 export const PanelTab = ({ active, selected, children }: TabProps) => {
   const theme = useTheme()
-  const bgColor = new tinycolor(theme['foreground']).setAlpha(0.3).toHex8String()
   return (
     <div
       className="flex items-center rounded px-1 py-0.5 font-bold"
