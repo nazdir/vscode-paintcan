@@ -208,7 +208,7 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'editor.background': primary.darkest,
     // 'foreground': createReadable(primary.darkest, primary.light), //text,
     'breadcrumb.foreground': createReadable(primary.darkest, primary.light), //text,
-    'icon.foreground': primary.main.isDark() ? secondary.light : secondary.dark,
+    'icon.foreground': primary.main.isDark() ? secondary.main : secondary.dark,
     'input.background': primary.darkest,
     'list.activeSelectionBackground': primary.light.clone().setAlpha(0.4),
     'list.focusBackground': primary.lighter.clone().setAlpha(0.4),
