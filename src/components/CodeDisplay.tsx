@@ -15,10 +15,10 @@ const CodeDisplay = () => {
     <div className="h-full w-full overflow-hidden rounded text-sm" style={{ backgroundColor: theme['titleBar.activeBackground'] }}>
       <div className="grid h-full grid-rows-[auto_1fr_auto]">
         <TitleBar />
-        <div className="flex min-h-0 gap-2 p-2">
+        <div className="flex min-h-0 p-2">
           <ActivityBar />
           <PrimarySideBar />
-          <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-2">
+          <div className="flex min-h-0 min-w-0 flex-1 flex-col">
             <div className="min-h-0 min-w-0 flex-1">
               <Editor />
             </div>

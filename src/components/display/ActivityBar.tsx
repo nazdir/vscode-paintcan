@@ -9,13 +9,14 @@ const ActivityBar = () => {
   return (
     <div
       id="activity-bar"
-      className="flex h-full w-5 flex-col items-center justify-between overflow-hidden rounded p-1 pb-2 text-xl"
+      className="flex h-full w-7 flex-col items-center justify-between overflow-hidden rounded-l-md border p-1 pb-2 text-xl"
       style={{
-        backgroundColor: theme['activityBar.background'],
+        backgroundColor: theme['modernActivityBar.background'],
         color: theme['activityBar.inactiveForeground'],
+        borderColor: theme['surface.border'],
       }}
     >
-      <div className="flex flex-col gap-4">
+      <div className="flex h-full flex-col gap-4">
         <VscFiles className="rounded p-0.5" style={{ color: theme['modernActivityBar.activeForeground'], backgroundColor: theme['modernActivityBar.activeBackground'] }} />
         <VscSearch />
         <div className="relative">

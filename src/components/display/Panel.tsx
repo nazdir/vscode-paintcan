@@ -6,8 +6,8 @@ const Panel = () => {
   const theme = useTheme()
 
   return (
-    <div id="bottom-panel" className="flex h-full w-full flex-col overflow-hidden rounded border" style={{ borderColor: theme['surface.border'] }}>
-      <div className="flex items-center justify-between p-1 text-xs font-bold" style={{ backgroundColor: theme['panel.background'] }}>
+    <div id="bottom-panel" className="flex h-full w-full flex-col overflow-hidden rounded-md border px-1 pt-1" style={{ borderColor: theme['surface.border'] }}>
+      <div className="flex items-center justify-between rounded-t-md px-1 text-xs font-bold" style={{ backgroundColor: theme['panel.background'] }}>
         <div className="flex gap-2">
           <PanelTab selected>Terminal</PanelTab>
           <div className="flex items-center">
@@ -24,6 +24,7 @@ const Panel = () => {
         </div>
       </div>
       <div
+        className="overflow-hidden rounded-b-md"
         style={{
           background: theme['panel.background'],
           color: theme['panelTitle.activeForeground'],

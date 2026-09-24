@@ -10,13 +10,13 @@ const Editor = () => {
 
   return (
     <div
-      className="flex h-full min-h-0 flex-col overflow-hidden rounded border"
+      className="mr-1 ml-1 flex h-full min-h-0 flex-col overflow-hidden rounded-md border"
       style={{
         background: theme['editor.background'],
         borderColor: theme['surface.border'],
       }}
     >
-      <div className="flex w-full shrink-0 justify-between p-1">
+      <div className="flex w-full shrink-0 justify-between" style={{ backgroundColor: theme['editorGroupHeader.tabsBackground'] }}>
         <div className="flex gap-2">
           <Tab>{openFiles[4]}</Tab>
           <Tab active>activeFile.ts</Tab>
@@ -53,11 +53,11 @@ const Tab = ({ active, selected, children }: TabProps) => {
   const theme = useTheme()
   return (
     <div
-      className="rounded px-1 py-0.5 font-bold text-white/50"
+      className="rounded-t px-1 py-0.5 font-bold text-white/50"
 
       style={{
         color: selected ? theme['modernEditorTab.activeForeground'] : undefined,
-        backgroundColor: selected ? theme['modernEditorTab.activeBackground'] : theme['modernEditorTab.inactiveBackground'],
+        backgroundColor: selected ? theme['editor.background'] : 'transparent',
       }}
     >
       {children}

@@ -11,7 +11,7 @@ const PrimarySideBar = () => {
 
   return (
     <div
-      className="w-75 overflow-hidden rounded border p-2 text-xs"
+      className="w-75 overflow-hidden rounded-r-md border p-2 text-xs"
       style={{
         backgroundColor: theme['sideBar.background'],
         color: theme['sideBar.foreground'],

@@ -61,9 +61,7 @@ export interface Theme {
   primary: string
   secondary: string
   tertiary: string
-  'activityBar.background': string
-  // 'activityBar.border': string //? not used
-  // 'activityBar.foreground': string //? not used
+
   'activityBar.inactiveForeground': string
   'activityBarBadge.background': string
   'activityBarBadge.foreground': string
@@ -74,8 +72,8 @@ export interface Theme {
   'button.foreground': string
   'button.hoverBackground': string
   'editor.background': string
-  // 'focusBorder': string //? not used
-  // 'foreground': string //* don't want
+  'editorGroupHeader.tabsBackground': string
+  'focusBorder': string
   'icon.foreground': string
   'input.background': string
   'list.activeSelectionBackground': string
@@ -84,19 +82,31 @@ export interface Theme {
   'list.inactiveSelectionBackground': string
   'menu.background': string
   'menu.foreground': string
-  'modernActivityBar.activeForeground': string
-  'modernActivityBar.hoverForeground': string
-  'modernActivityBar.hoverBackground': string
-  'modernActivityBar.activeBackground': string
+  'modernActivityBar.background': string
+  'modernActivityBar.border': string
+  'modernActivityBarItem.activeBackground': string
+  'modernActivityBarItem.activeForeground': string
+  'modernActivityBarItem.hoverBackground': string
+  'modernActivityBarItem.hoverForeground': string
+  'modernEditorTab.activeBackground': string
+  'modernEditorTab.activeForeground': string
+  'modernEditorTab.activeHoverBackground': string
+  'modernEditorTab.hoverBackground': string
+  'modernEditorTab.hoverForeground': string
+  'modernEditorTab.inactiveBackground': string
+  'modernTab.activeBackground': string
+  'modernTab.activeForeground': string
+  'modernTab.hoverBackground': string
+  'modernTab.hoverForeground': string
   'panel.background': string
   'panelTitle.activeBorder': string
   'panelTitle.activeForeground': string
   'panelTitle.inactiveForeground': string
   'panelTitleBadge.background': string
   'panelTitleBadge.foreground': string
+  'progressBar.background': string
   'sideBar.background': string
   'sideBar.foreground': string
-  // 'sideBarSectionHeader.background': string //? not used
   'sideBarSectionHeader.foreground': string
   'statusBar.background': string
   'statusBar.foreground': string
@@ -114,20 +124,14 @@ export interface Theme {
   'titleBar.activeForeground': string
   'titleBar.inactiveBackground': string
   'titleBar.inactiveForeground': string
+
+  // 'focusBorder': string //? not used
+  // 'foreground': string //* don't want
   // 'modernEditorTab.activeActionBackground': string //* don't want
   // 'modernEditorTab.activeHoverActionBackground': string //* don't want
   // 'modernEditorTab.hoverActionBackground': string //* don't want
-  'modernEditorTab.activeBackground': string
-  'modernEditorTab.activeForeground': string
-  'modernEditorTab.activeHoverBackground': string
-  'modernEditorTab.hoverBackground': string
-  'modernEditorTab.hoverForeground': string
-  'modernEditorTab.inactiveBackground': string
   // 'modernEditorTab.selectedActionBackground': string //* don't want
-  'modernTab.activeBackground': string
-  'modernTab.activeForeground': string
-  'modernTab.hoverBackground': string
-  'modernTab.hoverForeground': string
+  // 'sideBarSectionHeader.background': string //? not used
 
   'primary.main'?: string
   'primary.dark'?: string
@@ -196,18 +200,18 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     primary: primary.main,
     secondary: secondary.main,
     tertiary: tertiary.main,
-    'activityBar.background': primary.main,
     'activityBar.inactiveForeground': primary.main.isDark() ? secondary.dark : secondary.light,
     'activityBarBadge.background': tertiary.main,
     'activityBarBadge.foreground': tertiary.main.isLight() ? black : white,
     'badge.background': tertiary.main,
     'badge.foreground': tertiary.main.isLight() ? black : white,
-    'button.background': primary.main,
-    'button.hoverBackground': primary.light,
-    'button.foreground': readableOnMain,
-    'editor.background': primary.darkest,
-    // 'foreground': createReadable(primary.darkest, primary.light), //text,
     'breadcrumb.foreground': createReadable(primary.darkest, primary.light), //text,
+    'button.background': primary.main,
+    'button.foreground': readableOnMain,
+    'button.hoverBackground': primary.light,
+    'editor.background': primary.darkest,
+    'editorGroupHeader.tabsBackground': primary.dark,
+    'focusBorder': secondary.main,
     'icon.foreground': primary.main.isDark() ? secondary.main : secondary.dark,
     'input.background': primary.darkest,
     'list.activeSelectionBackground': primary.light.clone().setAlpha(0.4),
@@ -216,16 +220,43 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'list.inactiveSelectionBackground': primary.light,
     'menu.background': primary.darker,
     'menu.foreground': white,
-    'modernActivityBar.activeForeground': secondary.light,
-    'modernActivityBar.hoverForeground': secondary.light,
-    'modernActivityBar.hoverBackground': primary[primary.main.isLight() ? 'light' : 'dark'].clone().setAlpha(0.5),
-    'modernActivityBar.activeBackground': primary[primary.main.isLight() ? 'light' : 'dark'].clone().setAlpha(0.5),
+    'modernActivityBar.background': primary.darker,
+    'modernActivityBar.border': primary.main,
+    'modernActivityBarItem.activeBackground': primary.main,
+    'modernActivityBarItem.activeForeground': secondary.light,
+    'modernActivityBarItem.hoverBackground': primary[primary.main.isLight() ? 'light' : 'dark'].clone().setAlpha(0.5),
+    'modernActivityBarItem.hoverForeground': secondary.light,
+    'modernEditorTab.activeBackground': primary.main,
+    'modernEditorTab.activeForeground': white,
+    'modernEditorTab.activeHoverBackground': primary.main,
+    'modernEditorTab.hoverBackground': primary.dark,
+    'modernEditorTab.hoverForeground': primary.lightest,
+    'modernEditorTab.inactiveBackground': primary.darkest,
+    'modernTab.activeBackground': primary.darker,
+    'modernTab.activeForeground': secondary.main,
+    'modernTab.hoverBackground': primary.dark,
+    'modernTab.hoverForeground': secondary.main,
     'panel.background': primary.darker,
     'panelTitle.activeBorder': tertiary.main, //panel tabs
     'panelTitle.activeForeground': readableOnDark, //panel tabs
     'panelTitle.inactiveForeground': readableOnDark.clone().setAlpha(0.6).desaturate(75), //panel tabs
     'panelTitleBadge.background': tertiary.main,
     'panelTitleBadge.foreground': tertiary.main.isLight() ? black : white,
+    'primary.dark': primary.dark,
+    'primary.darker': primary.darker,
+    'primary.darkest': primary.darkest,
+    'primary.light': primary.light,
+    'primary.lighter': primary.lighter,
+    'primary.lightest': primary.lightest,
+    'primary.main': primary.main,
+    'progressBar.background': secondary.main,
+    'secondary.dark': secondary.dark,
+    'secondary.darker': secondary.darker,
+    'secondary.darkest': secondary.darkest,
+    'secondary.light': secondary.light,
+    'secondary.lighter': secondary.lighter,
+    'secondary.lightest': secondary.lightest,
+    'secondary.main': secondary.main,
     'sideBar.background': primary.darker,
     'sideBar.foreground': white,
     'sideBarSectionHeader.foreground': readableOnDark,
@@ -241,41 +272,17 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'tab.activeBorder': secondary.main,
     'tab.inactiveForeground': white,
     'terminal.background': primary.darkest,
-    'titleBar.activeBackground': primary.main,
-    'titleBar.activeForeground': secondary.main,
-    'titleBar.inactiveBackground': primary.darker,
-    'titleBar.inactiveForeground': secondary.main.clone().setAlpha(0.75),
-    'modernEditorTab.activeBackground': primary.main,
-    'modernEditorTab.activeForeground': white,
-    'modernEditorTab.activeHoverBackground': primary.main,
-    'modernEditorTab.hoverBackground': primary.dark,
-    'modernEditorTab.hoverForeground': primary.lightest,
-    'modernEditorTab.inactiveBackground': primary.darkest,
-    'modernTab.activeBackground': primary.darker,
-    'modernTab.activeForeground': secondary.main,
-    'modernTab.hoverBackground': primary.dark,
-    'modernTab.hoverForeground': secondary.main,
-    'primary.main': primary.main,
-    'primary.dark': primary.dark,
-    'primary.darker': primary.darker,
-    'primary.darkest': primary.darkest,
-    'primary.light': primary.light,
-    'primary.lighter': primary.lighter,
-    'primary.lightest': primary.lightest,
-    'secondary.main': secondary.main,
-    'secondary.dark': secondary.dark,
-    'secondary.darker': secondary.darker,
-    'secondary.darkest': secondary.darkest,
-    'secondary.light': secondary.light,
-    'secondary.lighter': secondary.lighter,
-    'secondary.lightest': secondary.lightest,
-    'tertiary.main': tertiary.main,
     'tertiary.dark': tertiary.dark,
     'tertiary.darker': tertiary.darker,
     'tertiary.darkest': tertiary.darkest,
     'tertiary.light': tertiary.light,
     'tertiary.lighter': tertiary.lighter,
     'tertiary.lightest': tertiary.lightest,
+    'tertiary.main': tertiary.main,
+    'titleBar.activeBackground': primary.main,
+    'titleBar.activeForeground': secondary.main,
+    'titleBar.inactiveBackground': primary.darker,
+    'titleBar.inactiveForeground': secondary.main.clone().setAlpha(0.75),
   }
 
   return convertToStrings(rawTheme)
