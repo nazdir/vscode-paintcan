@@ -210,7 +210,7 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'button.foreground': readableOnMain,
     'button.hoverBackground': primary.light,
     'editor.background': primary.darkest,
-    'editorGroupHeader.tabsBackground': primary.dark,
+    'editorGroupHeader.tabsBackground': primary.darker,
     'focusBorder': secondary.main,
     'icon.foreground': primary.main.isDark() ? secondary.main : secondary.dark,
     'input.background': primary.darkest,
