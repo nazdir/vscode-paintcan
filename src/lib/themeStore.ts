@@ -72,7 +72,8 @@ export interface Theme {
   'button.foreground': string
   'button.hoverBackground': string
   'editor.background': string
-  'editorGroupHeader.tabsBackground': string
+  'editorGroupHeader.connectedTabsBackground': string
+  'editorGroupHeader.tabsBorder': string
   'focusBorder': string
   'icon.foreground': string
   'input.background': string
@@ -89,7 +90,7 @@ export interface Theme {
   'modernActivityBarItem.hoverBackground': string
   'modernActivityBarItem.hoverForeground': string
   'modernEditorTab.activeBackground': string
-  'modernEditorTab.activeForeground': string
+  // 'modernEditorTab.activeForeground': string
   'modernEditorTab.activeHoverBackground': string
   'modernEditorTab.hoverBackground': string
   'modernEditorTab.hoverForeground': string
@@ -118,6 +119,7 @@ export interface Theme {
   'statusBarItem.remoteHoverForeground': string
   'surface.border': string
   'tab.activeBorder': string
+  'tab.border': string
   'tab.inactiveForeground': string
   'terminal.background': string
   'titleBar.activeBackground': string
@@ -210,7 +212,8 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'button.foreground': readableOnMain,
     'button.hoverBackground': primary.light,
     'editor.background': primary.darkest,
-    'editorGroupHeader.tabsBackground': primary.darker,
+    'editorGroupHeader.connectedTabsBackground': primary.darker,
+    'editorGroupHeader.tabsBorder': primary.darkest,
     'focusBorder': secondary.main,
     'icon.foreground': primary.main.isDark() ? secondary.main : secondary.dark,
     'input.background': primary.darkest,
@@ -226,12 +229,11 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'modernActivityBarItem.activeForeground': secondary.light,
     'modernActivityBarItem.hoverBackground': primary[primary.main.isLight() ? 'light' : 'dark'].clone().setAlpha(0.5),
     'modernActivityBarItem.hoverForeground': secondary.light,
-    'modernEditorTab.activeBackground': primary.main,
-    'modernEditorTab.activeForeground': white,
+    'modernEditorTab.activeBackground': primary.darkest,
     'modernEditorTab.activeHoverBackground': primary.main,
     'modernEditorTab.hoverBackground': primary.dark,
     'modernEditorTab.hoverForeground': primary.lightest,
-    'modernEditorTab.inactiveBackground': primary.darkest,
+    'modernEditorTab.inactiveBackground': primary.darker,
     'modernTab.activeBackground': primary.darker,
     'modernTab.activeForeground': secondary.main,
     'modernTab.hoverBackground': primary.dark,
@@ -269,8 +271,9 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'statusBarItem.remoteHoverBackground': secondary.main,
     'statusBarItem.remoteHoverForeground': primary.main,
     'surface.border': primary.main,
-    'tab.activeBorder': secondary.main,
-    'tab.inactiveForeground': white,
+    'tab.activeBorder': primary.darkest,
+    'tab.border': primary.darkest,
+    'tab.inactiveForeground': readableOnDark.clone().setAlpha(0.6).desaturate(75),
     'terminal.background': primary.darkest,
     'tertiary.dark': tertiary.dark,
     'tertiary.darker': tertiary.darker,
@@ -284,6 +287,8 @@ const buildTheme = (primaryHex: string, secondaryHex: string, tertiaryHex: strin
     'titleBar.inactiveBackground': primary.darker,
     'titleBar.inactiveForeground': secondary.main.clone().setAlpha(0.75),
   }
+
+  console.log(tertiary)
 
   return convertToStrings(rawTheme)
 }
@@ -299,12 +304,6 @@ interface ThemeState {
 }
 
 const defaults = {
-  // primary: '#4e0001',
-  // secondary: '#eeeeee',
-  // tertiary: '#daa520',
-  // primary: '#eeeeee',
-  // secondary: '#640000',
-  // tertiary: '#000000',
   'primary': '#114452',
   'secondary': '#dab020',
   'tertiary': '#ffffff',
