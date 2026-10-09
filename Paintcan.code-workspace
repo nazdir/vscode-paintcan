@@ -7,6 +7,7 @@
   "settings": {
     "workbench.editor.decorations.colors": false,
     // "workbench.editor.decorations.badges": false,
+
     "workbench.colorCustomizations": {
       "primary": "#114452",
       "secondary": "#dab020",
@@ -33,7 +34,7 @@
       "menu.background": "#09242c",
       "menu.foreground": "#eeeeee",
       "modernActivityBar.background": "#09242c",
-      "modernActivityBar.border": "#114452",
+      "modernActivityBar.border": "#09242c",
       "modernActivityBarItem.activeBackground": "#114452",
       "modernActivityBarItem.activeForeground": "#e4c149",
       "modernActivityBarItem.hoverBackground": "#08212880",
@@ -65,7 +66,7 @@
       "statusBarItem.remoteForeground": "#dab020",
       "statusBarItem.remoteHoverBackground": "#dab020",
       "statusBarItem.remoteHoverForeground": "#114452",
-      "surface.border": "#114452",
+      "surface.border": "#09242c",
       "tab.activeBorder": "#06181d",
       "tab.border": "#06181d",
       "tab.inactiveForeground": "#7d7d7d99",
